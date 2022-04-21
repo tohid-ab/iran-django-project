@@ -1,0 +1,241 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/icons/fontawesome/css/all.min.css' %}">
+    <script src="{% static 'css/js/bootstrap.min.js' %}"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <title>iran django</title>
+</head>
+<body>
+     <header id="header">
+        <!-- sid menu right -->
+        <div id='ShadowMenu' class="shadow-main-menu">
+
+        </div>
+        <div id="mySidenav" class="sidenav">
+            <div id='Block-menu'>
+                <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+                <a class="image-responsive"><img src='{% static 'img/icons/django.jpg' %}'>
+                    <p style="margin-top: 21px;"></p>
+                </a>`
+                <br>
+                <br>
+                <div class='center-input'>
+                    <form method="GET" action="{% url 'blog:search' %}">
+                        <button title="Search" value="" type="submit" class="button"><img src="{% static 'img/icons/icons8-search-60.png' %}"></button>
+                        <input type="text" name="Q" class="textbox" placeholder="دنبال چی میگردی؟">
+                    </form>
+                </div>
+                <br>
+                <hr class="hr-respons-menu">
+                <br>
+                <a href="#" class='item-sidenav dark-them'><b>تم روشن</b><button class='item-header-style button-dark-them'><i class="fas fa-sun"></i></button></a>
+                <br>
+                <hr class="hr-respons-menu">
+                <br>
+                <div class="box-item">
+                    <a href="{% url 'blog:Home' %}" class='item-sidenav value-header'>صفحه اصلی&ensp;&ensp;<i class="fas fa-home-lg-alt"></i></a>
+                    <a href="{% url 'blog:Article' %}" class='item-sidenav value-header'>جنگو باگ<i class="fas fa-chalkboard-teacher"></i></a>
+                    <a href="{% url 'blog:Tricks' %}" class='item-sidenav value-header'>جنگو ترفند<i class="fas fa-chalkboard-teacher"></i></a>
+                    <a href="{% url 'blog:free-project' %}" class='item-sidenav value-header'>پروژه های رایگان&ensp;&ensp;<i class="fas fa-drafting-compass"></i></a>
+                    <a href="#" class='item-sidenav value-header'>درباره من&ensp;&ensp;<i class="fas fa-address-card"></i></a>
+                </div>
+            </div>
+        </div>
+
+        <!-- sid menu right -->
+        <div class="container">
+            <div class="row header-margin">
+                <div class="main-header">
+                    <nav class="navbar navbar-light bg-light-style">
+                        <div class='col-2 panel'>
+                            <div class="item-header">
+                                {% if user.is_authenticated %}
+                                    <button class='item-header-style'><a href="{% url 'account:logout' %}?next={{request.path}}"><i class="fas fa-user"></i></a> </button>
+                                    <button class='item-header-style'><i class="fas fa-moon"></i></button>
+                                    {% else %}
+                                    <div class="authenticad">
+                                        <div class="authenticad-login">
+                                            <a href="{% url 'account:register' %}">ثبت نام</a>
+                                        </div>
+                                        <div class="authenticad-register">
+                                            <a href="{% url 'account:login' %}">ورود</a>
+                                        </div>
+                                    </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                        <div class='col-8 search'>
+                            <div class='center-input'>
+                                <form method="GET" action="{% url 'blog:search' %}">
+                                    <button title="Search" value="" type="submit" class="button"><img src="{% static 'img/icons/icons8-search-60.png' %}"></button>
+                                    <input type="text" name="Q" class="textbox" placeholder="دنبال چی میگردی؟">
+                                </form>
+                            </div>
+                        </div>
+                        <div class='col-2 logo'>
+                            <div class='image-django'>
+                                <img src='{% static 'img/icons/django.jpg' %}'>
+                            </div>
+                        </div>
+                        <div class='responsive-activate'>
+                            <div class='col-3'>
+                                <div class="item-header">
+                                    {% if user.is_authenticated %}
+                                    <button class='item-header-style'><i class="fas fa-user"></i></button>
+                                    {% else %}
+                                    <div class="authenticad">
+                                        <div class="authenticad-login">
+                                            <a href="{% url 'account:register' %}">ثبت نام</a>
+                                        </div>
+                                        <div class="authenticad-register">
+                                            <a href="{% url 'account:login' %}">ورود</a>
+                                        </div>
+                                    </div>
+                                {% endif %}
+                                </div>
+                            </div>
+                            <div class='col-6'>
+                                <div class='image-django'>
+                                    <img src='{% static 'img/icons/django.jpg' %}' alt="جنگو django">
+                                </div>
+                            </div>
+                            <div class='col-3'>
+                                <div class="item-header-right">
+                                    <button class='item-header-style-right' onclick="openNav()"><img src="{% static 'img/icons/icons8-menu-60.png' %}" alt=""></button>
+                                </div>
+                            </div>
+                        </div>
+                    </nav>
+                </div>
+            </div>
+        </div>
+        <div class='container under-header'>
+            <div class="row header-margin-under">
+                <div class="col-1">
+                    <!-- hide      -->
+                </div>
+                <div class="col-10 main-header-under">
+
+                    <nav class="navbar navbar-light bg-light-style-under">
+                        <div class='col-12'>
+                            <ul class="navbar-under">
+                                <li class="nav-item-under">
+                                    <a class="nav-link" href="#">درباره من</a>
+                                </li>
+                                <li class="nav-item-under">
+                                    <a class="nav-link" href="{% url 'blog:free-project' %}">پروژه های رایگان</a>
+                                </li>
+                                <li class="nav-item-under">
+                                    <a class="nav-link" href="{% url 'blog:Article' %}">مقالات آموزشی</a>
+                                </li>
+                                <li class="nav-item-under">
+                                    <a class="nav-link" href="{% url 'blog:Tricks' %}">جنگو باگ</a>
+                                </li>
+                                <li class="nav-item-under">
+                                    <a class="nav-link" href="{% url 'blog:Home' %}">صفحه اصلی</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </nav>
+                </div>
+                <div class="col-1">
+                    <!-- hide -->
+                </div>
+            </div>
+        </div>
+    </header>
+    {% block content %}
+
+    {% endblock content %}
+
+      <!-- Site footer -->
+<footer class="container site-footer">
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-12 col-md-6">
+            <h6>About</h6>
+            <p class="text-justify">لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد کتابهای زیادی در شصت و سه درصد گذشته حال و آینده</p>
+          </div>
+
+          <div class="col-xs-6 col-md-3">
+            <h6>Categories</h6>
+            <ul class="footer-links">
+              <li><a href="#">لورم ایپسوم</a></li>
+              <li><a href="#">لورم ایپسوم</a></li>
+              <li><a href="#">لورم ایپسوم</a></li>
+              <li><a href="#">لورم ایپسوم</a></li>
+              <li><a href="#">لورم ایپسوم</a></li>
+              <li><a href="#">لورم ایپسوم</a></li>
+            </ul>
+          </div>
+
+          <div class="col-xs-6 col-md-3">
+            <h6>Quick Links</h6>
+            <ul class="footer-links">
+              <li><a href="#">لورم ایپسوم</a></li>
+              <li><a href="#">لورم ایپسوم</a></li>
+              <li><a href="#">لورم ایپسوم</a></li>
+              <li><a href="#">لورم ایپسوم</a></li>
+              <li><a href="#">لورم ایپسوم</a></li>
+            </ul>
+          </div>
+        </div>
+        <hr>
+      </div>
+      <div class="container">
+        <div class="row">
+          <div class="col-md-8 col-sm-6 col-xs-12">
+            <p class="copyright-text">لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ
+            </p>
+          </div>
+
+          <div class="col-md-4 col-sm-6 col-xs-12">
+            <ul class="social-icons">
+              <li><a class="instagram" href="#"><i class="fab fa-instagram"></i></a></li>
+              <li><a class="telegram" href="#"><i class="fab fa-telegram"></i></a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </footer>
+</body>
+<!-- javascript code -->
+
+<script>
+    function openNav() {
+        document.getElementById("Block-menu").style.display = "block";
+        document.getElementById("mySidenav").style.width = "280px";
+        document.getElementById("ShadowMenu").style.display = "block";
+    }
+
+    function closeNav() {
+        document.getElementById("Block-menu").style.display = "none";
+        document.getElementById("mySidenav").style.width = "0";
+        document.getElementById("ShadowMenu").style.display = "none";
+
+    }
+
+    var acc = document.getElementsByClassName("accordion");
+    var i;
+
+    for (i = 0; i < acc.length; i++) {
+      acc[i].addEventListener("click", function() {
+        this.classList.toggle("active");
+        var panel = this.nextElementSibling;
+        if (panel.style.maxHeight) {
+          panel.style.maxHeight = null;
+        } else {
+          panel.style.maxHeight = panel.scrollHeight + "px";
+        }
+      });
+    }
+</script>
+</html>

@@ -1,0 +1,44 @@
+{% extends 'header.html' %}
+{% load static %}
+{% block content %}
+    <main>
+        <div class="container">
+            <div class="box-article">
+                <div class="right-menu">
+                    <div class="category-list">
+                        <p class="text-category">آخرین مقالات</p>
+                        {% for suggested in suggested_article %}
+                            <div class="new-article">
+                                <div class="image-article-suggested" style="background-image: url({{ suggested.image.url }})"></div>
+                                <div class="text-a">
+                                    <p class="title-suggested">{{ suggested.title }}</p>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="left-menu">
+                    <div class="data-detail-article">
+                        <div id="nav-article-detail">
+                                <div class="navbar-article-detail">
+                                    <div class="item-title-article-detail">
+                                        <h3>{{ data.title }}</h3>
+                                    </div> <br>
+                                    <div class="item-list-article-detail">
+                                        <p class="row-article"><i class="fad fa-blinds"></i>دسته بندی ها: {% for categorys in data.category.all %} <span class="tag tag-red">{{ categorys.name }}</span> {% endfor %}</p>
+                                        <p class="row-article"><i class="fad fa-calendar-check"></i>تاریخ: {{ data.get_jalali_date|date:"Y/m/d" }}</p>
+                                        <p class="row-article"><i class="fad fa-user-edit"></i> نویسنده: {{ data.user.first_name }} {{ data.user.last_name }}</p>
+                                        <p class="row-article"><i class="fas fa-eye"></i>تعداد دیدگاه:{{ count }}</p>
+                                    </div>
+                                </div>
+                        </div>
+                        <img class="image-article-detail" src="{{ data.image.url }}" alt="slm,jdscnsdnc">
+                        <div class="data-detail">
+                            {{ data.description|safe }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+{% endblock %}

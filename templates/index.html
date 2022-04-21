@@ -1,0 +1,177 @@
+{% extends 'header.html' %}
+{% load static %}
+{% block content %}
+    <!-- main html -->
+
+
+
+    <main>
+        <div class="container main-impo">
+            <div class="image-photo">
+                <img src="{% static 'img/main.png' %}" alt="" class='main-image'>
+            </div>
+            <div class="text-header-main" style="background-image: url({% static 'img/—Pngtree—geometric shapes patterns vector_3553180.png' %})">
+                <p class="text-info-lorem">آموزش جنگو با ایران جنگو</p>
+                <p class="text-info-lorem-mini">لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است چاپگرها و متون بلکه روزنامه
+                و مجله در ستون و سطرآنچنان که لازم است و  ابزارهای
+                کاربردی می باشد</p>
+                <div class="button-join">
+                    <p><i class="fas fa-map-marker-alt"></i> به ما پیوندید</p>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="title-article">
+                <p class="article-text">آخرین مقالات آموزشی</p>
+                <p class="seen-article"><a href="{% url 'blog:Article' %}">مشاهده همه مقالات <i class="fas fa-arrow-to-left"></i></a></p>
+            </div>
+            <div class="article-slider">
+                    <div class="header-article">
+                        {% for articles in article %}
+                                <div class="thumbnail-image-back-page concerted">
+                                    <div class="thumbnail-image-page concerted" style="background-image: url({{ articles.image.url }})">
+                                    </div>
+                                    <div class="info-news">
+                                        {% for categorys in articles.category.all %}
+                                            <span class="tag tag-red">{{ categorys.name }}</span>
+                                        {% endfor %}
+
+                                        <p class="time-data">{{ articles.get_jalali_date|date:"Y/m/d" }}</p>
+                                        <div style="height: 4rem;margin: 0 0 27px 0;">
+                                            <p class="title-news"><a href="{{ articles.get_absolute_url }}">{{ articles.title }}</a></p>
+                                        </div>
+                                        <div>
+                                            <a class="btn-news"> <i class="fal fa-watch"></i> زمان مطالعه: 8 دقیقه</a>
+                                            <a class="btn-news-like" href="#" role="button">3 <i class="far fa-comment"></i></a>
+                                                {% if request.user.is_authenticated %}
+                                                    <button onclick="likePost(this)" id="{{ articles.pk }}" class="btn-news-like-heart">
+                                                      {{ articles.likes.count }}
+                                                        {% if articles in liked_posts %}
+                                                            <i class="fas fa-heart"></i>
+                                                        {% else %}
+                                                            <i class="far fa-heart"></i>
+                                                        {% endif %}
+                                                    </button>
+                                                {% else %}
+                                                    <button id="{{ articles.pk }}" class="btn-news-like-heart">
+                                                        {{ articles.likes.count }}
+                                                        <i class="far fa-heart"></i>
+                                                    </button>
+                                                    <script>
+                                                        function TestSweetAlert(){
+                                                            Swal.fire({
+                                                              icon: 'error',
+                                                              title: 'برای لایک کردن ابتدا وارد سایت شوید',
+                                                              showConfirmButton: false,
+                                                              timer: 1500
+                                                            });
+                                                        };
+
+                                                        $('#{{ articles.pk }}').on("click",TestSweetAlert);
+                                                    </script>
+                                                {% endif %}
+                                                <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+                                                <script>
+                                                    const likePost = function(button){
+
+                                                        post_id = $(button).attr('id');
+                                                        $.ajax({
+                                                            type:'POST',
+                                                            url: '{% url 'blog:like-post' %}',
+                                                            data: {
+                                                            'post_id': post_id,
+                                                            'csrfmiddlewaretoken': '{{ csrf_token }}'
+                                                            },
+
+                                                            success: function (response) {
+                                                                if(response.liked){
+                                                                    current_likes = parseInt($('#' + post_id).html()) ;
+                                                                    like_count = current_likes + 1
+                                                                    $(button).html(like_count + ' <i class="fas fa-heart"></i>');
+                                                                }
+                                                                else{
+                                                                    current_likes = parseInt($('#' + post_id).html()) ;
+                                                                    like_count = current_likes - 1
+                                                                    $(button).html(like_count + ' <i class="far fa-heart"></i>');
+                                                                };
+                                                            },
+
+                                                            error: () =>{
+                                                                console.log("sorry something went wrong");
+                                                            }
+                                                        })
+                                                    };
+                                                </script>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endfor %}
+
+                    </div>
+                    <div class="header-article a-header">
+                        {% for articles in article_block %}
+                            <div class="thumbnail-image-back concerted">
+                                <div class="thumbnail-image concerted" style="background-image: url({{ articles.image.url }})">
+                                </div>
+                                <div class="info-news">
+                                    <span class="tag tag-red">دسته بندی</span>
+                                    <p class="time-data">{{ articles.get_jalali_date|date:"Y/m/d" }}</p>
+                                    <p class="title-news">{{ articles.title }}</p>
+                                    <p class="under-titile-news">{{ articles.description|truncatechars:160 }}</p>
+                                    <a class="btn btn-primary btn-news" href="{{ articles.get_absolute_url }}" role="button">ادامه</a>
+                                    <a class="btn-news-like" href="#" role="button"><i class="far fa-comment"></i><br><p style="color: #acacac;font-size: 14px;">14</p></a>
+                                    <a class="btn-news-like" href="#" role="button"><i class="fas fa-heart"></i><br><p style="color: #acacac;font-size: 14px;">12</p></a>
+                                </div>
+                            </div>
+                        {% endfor %}
+
+                    </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="title-article">
+                <p class="article-text">جنگو ترفند</p>
+                <p class="seen-article">مشاهده همه ویدیو ها <i class="fas fa-arrow-to-left"></i></p>
+            </div>
+            <div class="row row-cols-1 row-cols-md-2 g-4">
+                {% for videos in video %}
+                    <div class="col">
+                        <div class="card">
+                          <div id="{{ videos.id_video }}"><script type="text/JavaScript" src="{{ videos.src }}"></script></div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="container">
+            <div class="panel-wrapper">
+                <p class="roadmap-title">مسیر یادگیری جنگو</p>
+                <div class="panel-design-show">
+                    <a href="#show" class="show btn-show-hide" id="show">ادامه مطلب</a>
+                    <a href="#hide" class="hide btn-show-hide" id="hide">بستن مطلب</a>
+                    <div class="panel-road">
+                        {% for maps in map %}
+                            {{ maps.text|safe }}
+                        {% endfor %}
+                    </div><!-- end panel -->
+                    <div class="fadee"></div>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            {% for questions in question %}
+                <button class="accordion">{{ questions.title }}</button>
+                <div class="panel-accordion">
+                  <p>{{ questions.description }}</p>
+                </div>
+            {% endfor %}
+
+        </div>
+    </main>
+
+
+
+    <!-- main html -->
+
+
+{% endblock %}
