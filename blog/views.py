@@ -139,6 +139,42 @@ class SearchBox(ListView):
         return object_list
 
 
+def category_filter(request, slug):
+    if request.user.is_authenticated:
+        article = ArticleClass.objects.filter(category__slug=slug, status='Activate')
+        # pagination or صفحه بندی
+        paginator = Paginator(article, 6)
+        page_number = request.GET.get('page')
+        articles = paginator.get_page(page_number)
+        # دسته بندی
+        category_d = CategoryClass.objects.filter(slug=slug)
+        # سیستم لایک
+        liked_posts = []
+        for liked_post in request.user.likes.all():
+            liked_posts.append(liked_post.post_id)
+        context = {
+            'category': category_d,
+            'pagination_article': articles,
+            'liked_posts': liked_posts,
+        }
+        return render(request, 'articles/article-category.html', context)
+
+    else:
+        article = ArticleClass.objects.filter(category__slug=slug, status='Activate')
+        # pagination or صفحه بندی
+        paginator = Paginator(article, 6)
+        page_number = request.GET.get('page')
+        articles = paginator.get_page(page_number)
+        # دسته بندی
+        category_d = CategoryClass.objects.filter(slug=slug)
+
+        context = {
+            'category': category_d,
+            'pagination_article': articles,
+        }
+
+        return render(request, 'articles/article.html', context)
+
 
 
 

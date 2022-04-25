@@ -116,7 +116,7 @@
                         <hr>
                         <p class="programing">دسته بندی</p>
                         {% for categorys in category %}
-                            <p class="list-category"><a href="{{ categorys.get_absolute_url }}">{{ categorys.name }}</a></p>
+                            <p class="list-category">{{ categorys.name }}</p>
                         {% endfor %}
 
                     </div>

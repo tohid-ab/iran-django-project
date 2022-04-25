@@ -320,7 +320,7 @@ form > .button {
     line-height: 43px;
     color: #434343bd;
     margin: 58px 57px 20px 0;
-} 
+}
 
 .button-join{
     width: 239px;
@@ -899,13 +899,17 @@ form > .button {
 }
 
 .list-category{
-    color: #8e8e8e;
     font-size: 15px;
     margin: 14px 64px;
     cursor: pointer;
 }
 
-.list-category:hover {
+.list-category a {
+    color: #8e8e8e;
+    text-decoration: none;
+}
+
+.list-category a:hover {
     color: #22577e;
 }
 
@@ -1050,6 +1054,7 @@ form > .button {
     height: 3rem;
     border-radius: 3px;
     padding: 0 30px;
+    margin: auto;
 }
 
 .google-button a {
@@ -1133,7 +1138,7 @@ form > .button {
     .item-header-right {
         float: left;
     }
-    
+
     .item-header-style-right {
         width: 54px;
         height: 54px;
@@ -1192,7 +1197,7 @@ form > .button {
         display: inline-block;
         margin: 0 5px;
     }
-    
+
     .hr-respons-menu{
         width: 215px;
         border: 1px solid grey;

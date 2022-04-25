@@ -12,6 +12,9 @@ class CategoryClass(models.Model):
     name = models.CharField(max_length=255, verbose_name='نام دسته بندی', name='name')
     slug = models.SlugField(max_length=255, verbose_name='لینک دسته بندی', name='slug')
 
+    def get_absolute_url(self):
+        return reverse('blog:slug', args=[str(self.slug)])
+
     def __str__(self):
         return self.name
 
