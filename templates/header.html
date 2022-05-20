@@ -11,6 +11,7 @@
     <script src="{% static 'css/js/bootstrap.min.js' %}"></script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <link rel="icon" type="image/x-icon" href="{% static 'img/django-icon-0.jpg' %}">
     <title>iran django</title>
 </head>
 <body>
@@ -42,10 +43,10 @@
                 <br>
                 <div class="box-item">
                     <a href="{% url 'blog:Home' %}" class='item-sidenav value-header'>صفحه اصلی&ensp;&ensp;<i class="fas fa-home-lg-alt"></i></a>
-                    <a href="{% url 'blog:Article' %}" class='item-sidenav value-header'>جنگو باگ<i class="fas fa-chalkboard-teacher"></i></a>
-                    <a href="{% url 'blog:Tricks' %}" class='item-sidenav value-header'>جنگو ترفند<i class="fas fa-chalkboard-teacher"></i></a>
-                    <a href="{% url 'blog:free-project' %}" class='item-sidenav value-header'>پروژه های رایگان&ensp;&ensp;<i class="fas fa-drafting-compass"></i></a>
-                    <a href="#" class='item-sidenav value-header'>درباره من&ensp;&ensp;<i class="fas fa-address-card"></i></a>
+                    <a href="{% url 'blog:Tricks' %}" class='item-sidenav value-header'>جنگو باگ<i class="fas fa-chalkboard-teacher"></i></a>
+                    <a href="{% url 'blog:Article' %}" class='item-sidenav value-header'>مقالات آموزشی<i class="fas fa-chalkboard-teacher"></i></a>
+                    <a href="{% url 'blog:free-project' %}" class='item-sidenav value-header'>پروژه های متن باز&ensp;&ensp;<i class="fas fa-drafting-compass"></i></a>
+                    <a href="{% url 'blog:about-me' %}" class='item-sidenav value-header'>درباره من&ensp;&ensp;<i class="fas fa-address-card"></i></a>
                 </div>
             </div>
         </div>
@@ -58,8 +59,28 @@
                         <div class='col-2 panel'>
                             <div class="item-header">
                                 {% if user.is_authenticated %}
-                                    <button class='item-header-style'><a href="{% url 'account:logout' %}?next={{request.path}}"><i class="fas fa-user"></i></a> </button>
-                                    <button class='item-header-style'><i class="fas fa-moon"></i></button>
+                                    <div class="dropdown" style="display: inline-flex">
+                                      <button style="width: 55px;height: 55px;background-color: #efefef;color: #2383ca;font-size: 19px;border-radius: 100%;border: none;" class="btn btn-secondary dropdowns" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <i class="fas fa-user"></i>
+                                      </button>
+                                      <ul class="dropdown-menu fucos" style="text-align: right;" aria-labelledby="dropdownMenuButton1">
+                                        <li><a class="dropdown-item" href="{% url 'account:dashboard' %}">پروفایل <i class="fas fa-user-circle"></i></a></li>
+                                        <li><a class="dropdown-item" href="{% url 'account:logout' %}?next={{request.path}}"> خروج <i class="far fa-sign-out"></i> </a></li>
+                                      </ul>
+                                    </div>
+                                    <button id="moon" class='item-header-style'><i class="fas fa-moon"></i></button>
+                                    <script>
+                                        function TestSweetAlert(){
+                                            Swal.fire({
+                                              icon: 'warning',
+                                              title: 'این قابلیت به زودی فعال میشود',
+                                              showConfirmButton: false,
+                                              timer: 2500
+                                            });
+                                        };
+
+                                        $('#moon').on("click",TestSweetAlert);
+                                    </script>
                                     {% else %}
                                     <div class="authenticad">
                                         <div class="authenticad-login">
@@ -89,7 +110,15 @@
                             <div class='col-3'>
                                 <div class="item-header">
                                     {% if user.is_authenticated %}
-                                    <button class='item-header-style'><i class="fas fa-user"></i></button>
+                                    <div class="dropdown" style="display: inline-flex">
+                                      <button style="width: 55px;height: 55px;background-color: #efefef;color: #2383ca;font-size: 19px;border-radius: 100%;border: none;" class="btn btn-secondary dropdowns" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <i class="fas fa-user"></i>
+                                      </button>
+                                      <ul class="dropdown-menu" style="text-align: right;" aria-labelledby="dropdownMenuButton1">
+                                        <li><a class="dropdown-item" href="{% url 'account:dashboard' %}">پروفایل</a></li>
+                                        <li><a class="dropdown-item" href="{% url 'account:logout' %}?next={{request.path}}">خروج</a></li>
+                                      </ul>
+                                    </div>
                                     {% else %}
                                     <div class="authenticad">
                                         <div class="authenticad-login">
@@ -128,10 +157,10 @@
                         <div class='col-12'>
                             <ul class="navbar-under">
                                 <li class="nav-item-under">
-                                    <a class="nav-link" href="#">درباره من</a>
+                                    <a class="nav-link" href="{% url 'blog:about-me' %}">درباره من</a>
                                 </li>
                                 <li class="nav-item-under">
-                                    <a class="nav-link" href="{% url 'blog:free-project' %}">پروژه های رایگان</a>
+                                    <a class="nav-link" href="{% url 'blog:free-project' %}">پروژه های متن باز</a>
                                 </li>
                                 <li class="nav-item-under">
                                     <a class="nav-link" href="{% url 'blog:Article' %}">مقالات آموزشی</a>

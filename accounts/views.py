@@ -42,3 +42,13 @@ def register_user(request):
             return redirect('blog:Home')
         user_form = UserRegistrationForm()
     return render(request, 'registration/register.html', {'user_form': user_form})
+
+
+def profile_user(request):
+    if not request.user.is_authenticated:
+        return redirect('account:login')
+    else:
+        if request.method == 'POST':
+            return redirect('blog:Home')
+        else:
+            return render(request, 'registration/profile.html')

@@ -1,0 +1,28 @@
+{% extends 'header.html' %}
+{% load static %}
+{% block content %}
+
+    <div class="container mt-5">
+    <div class="row d-flex justify-content-center align-items-center" style="height: 37vh;margin-bottom: 3rem;">
+        <div class="form-profile">
+            <div class="bg-white rounded" style="padding: 16px;">
+                <div style="display: flex;justify-content: space-between;">
+                    <div style="display: flex">
+                        <div class="position-relative"> <img style="border: 2px solid #2383ca;padding: 1px;" src="{% static 'img/prof.png' %}" width="80" class="rounded-circle"> </div>
+                        <div class="ml-2" style="margin: 0px 13px;">
+                            <h5 class="mb-0">{{ user.first_name }} {{ user.last_name }}</h5> <span>@{{ user }}</span>
+                        </div>
+                    </div>
+                    <div class=""> <span class="box-ellipse"><i class="fa fa-ellipsis-h"></i></span>
+                        <form method="post">
+                            {% csrf_token %}
+                            <button class="box-pensil"><i class="fa fa-pencil"></i></button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}

@@ -1,48 +1,65 @@
 from django.contrib import admin
-from .models import ArticleClass, DjangoTricks, AskedQuestions, CategoryClass, DjangoRoadMap, IpAddress, Like
+from .models import *
 from django_summernote.admin import SummernoteModelAdmin
 
 # Register your models here.
 
 
-@admin.register(CategoryClass)
 class CategoryAdmin(admin.ModelAdmin):
     list_display = ('name', 'slug',)
     prepopulated_fields = {'slug': ('name',)}
 
 
-@admin.register(ArticleClass)
+class ReplyCommentInline(admin.StackedInline):
+    model = ReplyComment
+    extra = 0
+
+
+class Comments(admin.ModelAdmin):
+    list_display = ('name', 'comment', 'post', 'email', 'status',)
+    list_filter = ('post', 'created_on',)
+
+    inlines = [
+        ReplyCommentInline,
+    ]
+
+
+class CommentInline(admin.StackedInline):
+    model = Comment
+    extra = 0
+
+
 class ImageAdmin(SummernoteModelAdmin):
     list_display = ('title', 'slug', 'get_jalali_date', 'status',)
     list_filter = ('created',)
     list_editable = ('status',)
     summernote_fields = ('description',)
     prepopulated_fields = {'slug': ('title',)}
+    inlines = [
+        CommentInline,
+    ]
 
 
-@admin.register(DjangoTricks)
 class DjangoTricksAdmin(admin.ModelAdmin):
     list_display = ('name_video', 'id_video', 'created',)
     list_filter = ('created',)
 
 
-@admin.register(AskedQuestions)
 class AskedQuestionsAdmin(admin.ModelAdmin):
     list_display = ('title', 'id', 'created',)
     list_filter = ('created',)
 
 
-@admin.register(DjangoRoadMap)
 class RoadMapDjangoAdmin(SummernoteModelAdmin):
     list_display = ('name',)
     summernote_fields = ('text',)
 
 
-@admin.register(IpAddress)
-class IPAddressAdmin(admin.ModelAdmin):
-    pass
-
-
-@admin.register(Like)
-class LikeAdmin(admin.ModelAdmin):
-    pass
+admin.site.register(CategoryClass, CategoryAdmin)
+admin.site.register(Comment, Comments)
+admin.site.register(ReplyComment)
+admin.site.register(ArticleClass, ImageAdmin)
+admin.site.register(AskedQuestions, AskedQuestionsAdmin)
+admin.site.register(DjangoRoadMap, RoadMapDjangoAdmin)
+admin.site.register(Like)
+admin.site.register(DjangoTricksDaily)

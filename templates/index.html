@@ -2,16 +2,13 @@
 {% load static %}
 {% block content %}
     <!-- main html -->
-
-
-
     <main>
         <div class="container main-impo">
             <div class="image-photo">
                 <img src="{% static 'img/main.png' %}" alt="" class='main-image'>
             </div>
             <div class="text-header-main" style="background-image: url({% static 'img/—Pngtree—geometric shapes patterns vector_3553180.png' %})">
-                <p class="text-info-lorem">آموزش جنگو با ایران جنگو</p>
+                <p class="text-info-lorem"> جنگو با ایران جنگو</p>
                 <p class="text-info-lorem-mini">لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است چاپگرها و متون بلکه روزنامه
                 و مجله در ستون و سطرآنچنان که لازم است و  ابزارهای
                 کاربردی می باشد</p>
@@ -108,24 +105,6 @@
                             {% endfor %}
 
                     </div>
-                    <div class="header-article a-header">
-                        {% for articles in article_block %}
-                            <div class="thumbnail-image-back concerted">
-                                <div class="thumbnail-image concerted" style="background-image: url({{ articles.image.url }})">
-                                </div>
-                                <div class="info-news">
-                                    <span class="tag tag-red">دسته بندی</span>
-                                    <p class="time-data">{{ articles.get_jalali_date|date:"Y/m/d" }}</p>
-                                    <p class="title-news">{{ articles.title }}</p>
-                                    <p class="under-titile-news">{{ articles.description|truncatechars:160 }}</p>
-                                    <a class="btn btn-primary btn-news" href="{{ articles.get_absolute_url }}" role="button">ادامه</a>
-                                    <a class="btn-news-like" href="#" role="button"><i class="far fa-comment"></i><br><p style="color: #acacac;font-size: 14px;">14</p></a>
-                                    <a class="btn-news-like" href="#" role="button"><i class="fas fa-heart"></i><br><p style="color: #acacac;font-size: 14px;">12</p></a>
-                                </div>
-                            </div>
-                        {% endfor %}
-
-                    </div>
             </div>
         </div>
         <div class="container">
@@ -147,8 +126,8 @@
             <div class="panel-wrapper">
                 <p class="roadmap-title">مسیر یادگیری جنگو</p>
                 <div class="panel-design-show">
-                    <a href="#show" class="show btn-show-hide" id="show">ادامه مطلب</a>
-                    <a href="#hide" class="hide btn-show-hide" id="hide">بستن مطلب</a>
+                    <a href="#show" class="showe btn-show-hide" id="show">ادامه مطلب</a>
+                    <a href="#hide" class="hidee btn-show-hide" id="hide">بستن مطلب</a>
                     <div class="panel-road">
                         {% for maps in map %}
                             {{ maps.text|safe }}

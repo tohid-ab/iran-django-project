@@ -1,8 +1,11 @@
-from django.shortcuts import render, redirect
-from django.http import HttpResponse
-from . models import ArticleClass, DjangoTricks, AskedQuestions, DjangoRoadMap, CategoryClass, Like
+from django.shortcuts import render, redirect, get_object_or_404
+from django.http import HttpResponse, HttpResponseRedirect
+from . models import ArticleClass, DjangoTricks, AskedQuestions, DjangoRoadMap, CategoryClass, Like,\
+    Comment, DjangoTricksDaily, ReplyComment
 from django.db.models import Q
 from django.contrib.auth.models import User
+from .forms import CommentForm
+from django.contrib import messages
 # like system
 from django.http import JsonResponse
 from django.contrib.auth.decorators import login_required
@@ -63,10 +66,6 @@ def home_page(request):
         return render(request, 'index.html', context)
 
 
-def trick_page(request):
-    return render(request, 'tricks/django-tricks.html')
-
-
 def article_page(request):
 
     if request.user.is_authenticated:
@@ -106,14 +105,40 @@ def article_page(request):
 
 
 def detail_article(request, slug):
-    data = ArticleClass.objects.get(slug=slug)
+    data = get_object_or_404(ArticleClass, slug=slug)
+    # سیستم کامنت
+    comment = Comment.objects.filter(post=data, status=True).order_by('-created_on')
+    new_comment = None
     category = CategoryClass.objects.all()
     suggested_article = ArticleClass.objects.filter(status='Activate')[0:4]
+    # Comment posted
+    if request.method == 'POST':
+        comment_form = CommentForm(data=request.POST)
+        if comment_form.is_valid():
+            # Create Comment object but don't save to database yet
+            new_comment = comment_form.save(commit=False)
+            name = comment_form.cleaned_data.get('name')
+            email = comment_form.cleaned_data.get('email')
+            comment_s = comment_form.cleaned_data.get('comment')
+            new_comment.name = name
+            new_comment.email = email
+            new_comment.comment = comment_s
+            # Assign the current post to the comment
+            new_comment.post = data
+            # Save the comment to the database
+            new_comment.save()
+            messages.success(request, 'خیلی ممنون ، نظر شما پس از برسی نمایش داده خواهد شد')
+            return redirect(f'/articles/{slug}')
+    else:
+        comment_form = CommentForm()
 
     context = {
         'data': data,
+        'comment': comment,
         'category': category,
         'suggested_article': suggested_article,
+        'new_comment': new_comment,
+        'comment_form': comment_form,
     }
     return render(request, 'articles/detail-article.html', context)
 
@@ -175,6 +200,17 @@ def category_filter(request, slug):
 
         return render(request, 'articles/article.html', context)
 
+
+def about_me(request):
+    return render(request, 'about-me.html')
+
+
+def trick_page(request, random_url):
+    form_detail = get_object_or_404(DjangoTricksDaily, random_url=random_url)
+    context = {
+        'form': form_detail,
+    }
+    return render(request, 'tricks/django-tricks.html', context)
 
 
 

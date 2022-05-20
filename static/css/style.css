@@ -1,23 +1,23 @@
-*{
+* {
     padding: 0;
     margin: 0;
     box-sizing: border-box;
     font-family: "B Yekan";
 }
 
-@font-face{
+@font-face {
     font-family:"B Yekan";
     src:url(../fonts/yekan/Yekan.ttf) format("ttf");
     font-weight:normal;
 }
 
-@font-face{
+@font-face {
     font-family:Lalezar;
     src:url(../fonts/Lalezar-Regular.ttf) format("ttf");
     font-weight:normal;
 }
 
-body{
+body {
     background-color: #f3f4f6;
 }
 
@@ -36,29 +36,29 @@ body::-webkit-scrollbar-thumb {
 }
 /* header */
 
-.responsive-activate{
+.responsive-activate {
     display: none;
 }
 
-.header-margin{
+.header-margin {
     margin-top: 35px;
 }
 
-.main-header{
+.main-header {
     width: 100%;
 }
 
-.bg-light-style{
+.bg-light-style {
     height: 132px;
     background-color: #ffffff;
     border-radius: 23px;
 }
 
-.item-header{
+.item-header {
     text-align: center;
 }
 
-.authenticad{
+.authenticad {
     display: inline-block;
     border-radius: 12px;
     background-color: #9acae4;
@@ -66,24 +66,24 @@ body::-webkit-scrollbar-thumb {
     padding: 0 10px 0 0;
 }
 
-.authenticad a{
+.authenticad a {
     color: #ffffff;
     text-decoration: none;
 }
 
-.authenticad-login{
+.authenticad-login {
     display: inline-block;
     background-color: #2383ca;
     padding: 10px 27px;
     border-radius: 12px;
 }
 
-.authenticad-register{
+.authenticad-register {
     display: inline-block;
     margin: 0 5px;
 }
 
-.item-header-style{
+.item-header-style {
     width: 55px;
     height: 55px;
     font-size: 22px;
@@ -98,17 +98,21 @@ body::-webkit-scrollbar-thumb {
     color: #2383ca;
 }
 
-.item-header-style img{
+.item-header-style img {
     width: 28px;
 }
 
-.image-django img{
+.image-django img {
     width: 87px;
+}
+
+.fucos:focus {
+
 }
 
 /* search input */
 
-.center-input{
+.center-input {
     text-align: center;
 }
 
@@ -143,11 +147,11 @@ form > .button {
     border-radius: 18px 0 0 18px;
 }
 
-.button img{
+.button img {
     width: 27px;
 }
 
-.shadow-main-menu{
+.shadow-main-menu {
     background: #00000047;
     width: 100%;
     height: 100%;
@@ -161,17 +165,17 @@ form > .button {
 
 /* under header */
 
-.bg-light-style-under{
+.bg-light-style-under {
     height: 60px;
     background-color: #22577E;
     border-radius: 0 0 18px 18px;
 }
 
-.item-header-under{
+.item-header-under {
     text-align: center;
 }
 
-.item-header-style-under{
+.item-header-style-under {
     width: 55px;
     height: 55px;
     border-radius: 100%;
@@ -180,25 +184,25 @@ form > .button {
     margin: 0 5px;
 }
 
-.item-header-style-under img{
+.item-header-style-under img {
     width: 28px;
 }
 
 
-.navbar-under{
+.navbar-under {
     text-align: center;
     list-style-type: none;
 }
 
-.nav-item-under{
+.nav-item-under {
     display: inline-block;
 }
 
-.nav-item-under a{
+.nav-item-under a {
     color: white;
 }
 
-.nav-item-under a:hover{
+.nav-item-under a:hover {
     color: #95D1CC;
 }
 
@@ -240,7 +244,7 @@ form > .button {
     margin-left: 0;
 }
 
-.image-responsive{
+.image-responsive {
     display: inline-flex !important;
 }
 
@@ -249,24 +253,24 @@ form > .button {
     display: block;
 }
 
-.item-sidenav{
+.item-sidenav {
     color: #34495E !important;
     font-size: 17px !important;
     background-color: #ffffff;
 }
 
-.value-header{
+.value-header {
     border-radius: 9px;
     margin: 15px 0;
 }
 
-.box-item{
+.box-item {
     display: block;
     margin: auto;
     width: 90%;
 }
 
-.dark-them{
+.dark-them {
     width: 80%;
     height: 47px;
     display: block;
@@ -282,39 +286,39 @@ form > .button {
 
 /* main */
 
-.video{
+.video {
 
 }
 
-.main-impo{
+.main-impo {
     display: flex;
     justify-content: center;
 }
 
-.text-header-main{
+.text-header-main {
     width: 100%;
     text-align: right;
     background-size: auto;
     background-position: right;
 }
 
-.image-photo{
+.image-photo {
     width: 100%;
     padding: 16px 0;
 }
 
-.text-info-lorem{
+.text-info-lorem {
     font-size: 45px;
     font-weight: bold;
     margin: 85px 61px 0 0;
     color: #414141;
 }
 
-.image-programer{
+.image-programer {
     max-width: 100%;
 }
 
-.text-info-lorem-mini{
+.text-info-lorem-mini {
     font-size: 17px;
     font-weight: bold;
     line-height: 43px;
@@ -322,7 +326,7 @@ form > .button {
     margin: 58px 57px 20px 0;
 }
 
-.button-join{
+.button-join {
     width: 239px;
     height: 54px;
     background-color: #2383ca;
@@ -334,36 +338,36 @@ form > .button {
     margin: 22px 25px;
 }
 
-.button-join p{
+.button-join p {
     font-size: 23px;
     font-weight: bold;
 }
 
-.main-image{
+.main-image {
     width: 492px;
     display: block;
     margin: auto;
 }
 
-.main-article{
+.main-article {
     height: 31em;
 }
 
-.title-article{
+.title-article {
     width: 100%;
     height: auto;
     padding: 50px 0;
     direction: rtl;
 }
 
-.article-text{
+.article-text {
     display: inline-block;
     font-size: 35px;
     font-weight: 600;
     color: #414141;
 }
 
-.article-text:before{
+.article-text:before {
     content: "";
     color: #f3f4f6;
     transform: rotate(211deg);
@@ -375,7 +379,7 @@ form > .button {
     display: inline-block;
 }
 
-.seen-article{
+.seen-article {
     display: inline-block;
     float: left;
     font-size: 19px;
@@ -384,22 +388,22 @@ form > .button {
     cursor: pointer;
 }
 
-.seen-article a{
+.seen-article a {
     color: #3c3c3c;
     text-decoration: none;
 }
 
-.seen-article a:hover{
+.seen-article a:hover {
     color: #0d6efd;
     text-decoration: none;
     transition: 0.2s;
 }
 
-.seen-article:hover{
+.seen-article:hover {
     color: #2383ca;
 }
 
-.seen-article i{
+.seen-article i {
     color: #2383ca;
 }
 
@@ -437,31 +441,6 @@ form > .button {
 .tag-red {
     background: #2383ca;
     color: #fafafa;
-}
-
-.thumbnail-image {
-    height: 10em;
-    width: 300px;
-    background-size: cover;
-    border-radius: 12px;
-    position: relative;
-    margin: 16px auto;
-    box-shadow: 0 0 6px grey;
-}
-
-.thumbnail-image-back{
-    background-color: white;
-    box-shadow: 0 0 16px #c3c3c3;
-    width: 320px;
-    height: auto;
-    position: relative;
-    border-radius: 18px;
-    display: block;
-    direction: rtl;
-}
-
-.concerted{
-    /* empty */
 }
 
 .info-news {
@@ -567,20 +546,20 @@ form > .button {
     border: 2px solid #0d6efd;
 }
 
-.show, .hide {
+.showe, .hidee {
       position: absolute;
       bottom: -27px;
       z-index: 100;
       text-align: center;
 }
 
-.hide {display: none;}
-.show:target {display: none;}
-.show:target ~ .hide {display: block;}
-.show:target ~ .panel-road {
+.hidee {display: none;}
+.showe:target {display: none;}
+.showe:target ~ .hidee {display: block;}
+.showe:target ~ .panel-road {
     max-height: 2000px;
 }
-.show:target ~ .fadee {
+.showe:target ~ .fadee {
     margin-top: -24px;
 }
 
@@ -806,7 +785,9 @@ form > .button {
 .text-category{
     font-size: 19px;
     color: #717171;
-    padding: 12px 67px 0 0;
+    padding: 20px 67px 15px 0;
+    background: #e9e9e9;
+    border-radius: 12px 12px 0 0;
 }
 
 .text-category:before{
@@ -962,9 +943,19 @@ form > .button {
     display: flex;
 }
 
+.new-article p {
+    font-family: Lalezar;
+}
+
+.new-article a {
+    color: #007bff;
+    text-decoration: none;
+    font-family: Lalezar;
+}
+
 .item-title-article-detail{
     width: 95%;
-    height: 8vh;
+    height: auto;
     margin: auto;
     border-bottom: 2px solid #e4e4e4;
     text-align: right;
@@ -1024,6 +1015,39 @@ form > .button {
     margin: 0 7px;
 }
 
+.comment-article {
+    width: 90%;
+    height: auto;
+    padding: 30px;
+    margin: 35px auto;
+    background-color: white;
+    border-radius: 12px;
+    direction: rtl;
+}
+
+.comment-article-count {
+    padding: 10px;
+    background: #f7f7f7;
+    border-radius: 12px;
+    margin: 14px auto;
+}
+
+.image-user-comment {
+    border: 2px solid #22577e;
+    border-radius: 30px;
+    padding: 1px;
+}
+
+.reply-comment {
+    max-width: 100%;
+    height: auto;
+    background: #2f8ed5;
+    color: white;
+    padding: 10px 12px;
+    margin: 10px 40px;
+    border-radius: 12px;
+}
+
 /*detail page*/
 
 /*registration pages*/
@@ -1062,6 +1086,53 @@ form > .button {
     text-decoration: none;
 }
 
+
+/*profile page*/
+
+.height-100 {
+    height: 100vh
+}
+
+.dots {
+    height: 20px;
+    width: 20px;
+    background-color: green;
+    border-radius: 50%;
+    border: 2px solid #fff;
+    right: -4px;
+    bottom: 8px
+}
+
+.box-ellipse {
+    background-color: #ebedf0;
+    padding-right: 10px;
+    color: #000;
+    padding-left: 10px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    border-radius: 4px;
+    cursor: pointer
+}
+
+.box-pensil {
+    background-color: blue;
+    color: #fff;
+    cursor: pointer;
+    font-size: 15px;
+    padding-right: 10px;
+    padding-left: 10px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    border-radius: 4px
+}
+
+.form-profile {
+    width: 55%;
+}
+
+/*profile page*/
+
+
 /*registration pages*/
 
 /* responsive code */
@@ -1069,6 +1140,31 @@ form > .button {
 @media only screen and (max-width: 1400px) {
     .roadmap-title{
         left: 60%;
+    }
+
+    .thumbnail-image-back-page {
+        width: 250px;
+    }
+
+    .thumbnail-image-page {
+        height: 8em;
+        width: 223px;
+    }
+
+    .info-news {
+        width: 235px;
+    }
+
+    .title-news a {
+        font-size: 18px;
+    }
+
+    .tag {
+        font-size: 11px;
+    }
+
+    .time-data {
+        margin: 15px 0 0 0;
     }
 }
 
@@ -1080,10 +1176,6 @@ form > .button {
 
     .authenticad-register{
         padding: 0;
-    }
-
-    .header-article{
-        display: none;
     }
 
     .header-article.a-header{
@@ -1287,7 +1379,7 @@ form > .button {
         left: 25%;
     }
 
-    .show, .hide {
+    .showe, .hidee {
         bottom: -21px;
     }
 
@@ -1295,10 +1387,6 @@ form > .button {
         left: 38%;
         padding: 9px;
         width: 27%;
-    }
-
-    .thumbnail-image-back{
-        margin: 30px 0;
     }
     /* main responsive */
     .site-footer
@@ -1434,6 +1522,10 @@ form > .button {
 
     .login-form {
         width: 95%;
+    }
+
+    .form-profile {
+        width: 100%;
     }
 
     /*registration page*/

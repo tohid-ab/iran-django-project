@@ -1,4 +1,5 @@
 {% extends 'header.html' %}
+{% load widget_tweaks %}
 {% load static %}
 {% block content %}
     <main>
@@ -9,9 +10,8 @@
                         <p class="text-category">آخرین مقالات</p>
                         {% for suggested in suggested_article %}
                             <div class="new-article">
-                                <div class="image-article-suggested" style="background-image: url({{ suggested.image.url }})"></div>
                                 <div class="text-a">
-                                    <p class="title-suggested">{{ suggested.title }}</p>
+                                    <p class="title-suggested"><a href="{{ suggested.get_absolute_url }}">{{ suggested.title }}</a> </p>
                                 </div>
                             </div>
                         {% endfor %}
@@ -28,7 +28,6 @@
                                         <p class="row-article"><i class="fad fa-blinds"></i>دسته بندی ها: {% for categorys in data.category.all %} <span class="tag tag-red">{{ categorys.name }}</span> {% endfor %}</p>
                                         <p class="row-article"><i class="fad fa-calendar-check"></i>تاریخ: {{ data.get_jalali_date|date:"Y/m/d" }}</p>
                                         <p class="row-article"><i class="fad fa-user-edit"></i> نویسنده: {{ data.user.first_name }} {{ data.user.last_name }}</p>
-                                        <p class="row-article"><i class="fas fa-eye"></i>تعداد دیدگاه:{{ count }}</p>
                                     </div>
                                 </div>
                         </div>
@@ -37,8 +36,50 @@
                             {{ data.description|safe }}
                         </div>
                     </div>
+                    <div class="comment-article">
+                        {% if messages %}
+                            {% for message in messages %}
+                                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                  {{ message }}
+                                  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                </div>
+                            {% endfor %}
+                        {% endif %}
+                        <form method="post">
+                            {% csrf_token %}
+                            {% render_field comment_form.name|add_class:"form-control" id='id_name_js' placeholder="نام شما" %}<br>
+                            {% render_field comment_form.email|add_class:"form-control" id='id_name_js' placeholder="ایمیل شما" %}<br>
+                            {% render_field comment_form.comment|add_class:"form-control" id='id_comment_js' placeholder="نظر شما چیست؟" %}<br>
+                            <input type="hidden" name="next" value="{{next}}">
+                            <button type="submit" class="btn btn-primary">ثبت نظر</button>
+                        </form>
+                        <hr>
+                        {% for i in comment %}
+                            <div class="comment-article-count">
+                                <img class="image-user-comment" src="{% static 'img/prof.png' %}" alt="جنگو">
+                                <p style="color: #8c8c8c;"> {{ i.name }} <b style="color: #535353;">گفت؟</b></p>
+                            &nbsp;&nbsp;{{ i.comment }}<br>
+                                {% if i.replycomment_set.all %}
+                                    {% for foo in i.replycomment_set.all %}
+                                        <div class="reply-comment">
+                                                <img class="image-user-comment" src="{% static 'img/prof.png' %}" alt="جنگو">
+                                                 <p> {{ foo.user_name }} <b>گفت؟</b></p>
+                                                {{ foo.text }}
+                                        </div>
+                                    {% endfor %}
+                                {% endif %}
+                            </div>
+                        {% endfor %}
+
+                    </div>
                 </div>
             </div>
         </div>
     </main>
+    <script>
+        window.onload = function() {
+          document.getElementById('id_name_js').value = '';
+          document.getElementById('id_comment_js').value = '';
+          }
+    </script>
 {% endblock %}

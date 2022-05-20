@@ -4,6 +4,8 @@ from jalali_date import date2jalali, datetime2jalali
 from ckeditor.fields import RichTextField
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
+import uuid
+
 
 # Create your models here.
 
@@ -17,10 +19,6 @@ class CategoryClass(models.Model):
 
     def __str__(self):
         return self.name
-
-
-class IpAddress(models.Model):
-    ip_address = models.GenericIPAddressField(null=True, verbose_name='آیپی کاربر')
 
 
 class ArticleClass(models.Model):
@@ -37,7 +35,6 @@ class ArticleClass(models.Model):
     image = models.ImageField(upload_to='article/%Y/%m/%d', blank=True, verbose_name='عکس', name='image', null=True)
     created = models.DateTimeField(auto_now_add=True, verbose_name='زمان ساخت', name='created')
     updated = models.DateTimeField(auto_now=True, verbose_name='آخرین آپدیت', name='update')
-    visits = models.ManyToManyField(IpAddress, blank=True, related_name='visits', verbose_name='تعداد بازدید مقاله')
 
     class Meta:
         ordering = ('-created',)
@@ -52,6 +49,31 @@ class ArticleClass(models.Model):
 
     def get_jalali_date(self):
         return datetime2jalali(self.created)
+
+
+class Comment(models.Model):
+    post = models.ForeignKey(ArticleClass, on_delete=models.CASCADE)
+    name = models.CharField(max_length=100)
+    email = models.EmailField(default=None)
+    comment = models.TextField(max_length=400)
+    created_on = models.DateTimeField(auto_now_add=True)
+    status = models.BooleanField(default=False, verbose_name='وضعیت')
+
+    class Meta:
+        ordering = ['created_on']
+
+    def __str__(self):
+        return f'{self.comment[:60]} --> {self.post.title[:20]} | {self.status}'
+
+
+class ReplyComment(models.Model):
+    r_comment = models.ForeignKey(Comment, on_delete=models.CASCADE)
+    user_name = models.ForeignKey(User, on_delete=models.DO_NOTHING)
+    text = models.TextField()
+    created_on = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f'{self.r_comment} -> {self.text[:30]}'
 
 
 class Like(models.Model):
@@ -99,3 +121,11 @@ class DjangoRoadMap(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class DjangoTricksDaily(models.Model):
+    test = models.CharField(max_length=50, unique=True)
+    random_url = models.UUIDField(default=uuid.uuid4)
+
+    def __str__(self):
+        return self.test
