@@ -5,7 +5,7 @@ app_name = 'blog'
 
 urlpatterns = [
     path('', views.home_page, name='Home'),
-    path('django-bog/', views.trick_page, name='Tricks'),
+    path('contact-us/', views.trick_page, name='Tricks'),
     path('post/like/', views.like, name='like-post'),
     path('articles/', views.article_page, name='Article'),
     path('articles/category/<str:slug>', views.category_filter, name='slug'),

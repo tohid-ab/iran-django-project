@@ -1,10 +1,9 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse, HttpResponseRedirect
-from . models import ArticleClass, DjangoTricks, AskedQuestions, DjangoRoadMap, CategoryClass, Like,\
-    Comment, DjangoTricksDaily, ReplyComment
+from . models import *
 from django.db.models import Q
 from django.contrib.auth.models import User
-from .forms import CommentForm
+from .forms import CommentForm, ContactForm
 from django.contrib import messages
 # like system
 from django.http import JsonResponse
@@ -205,11 +204,28 @@ def about_me(request):
     return render(request, 'about-me.html')
 
 
-def trick_page(request, random_url):
-    form_detail = get_object_or_404(DjangoTricksDaily, random_url=random_url)
+def trick_page(request):
+    if request.method == 'POST':
+        contact_form = ContactForm(request.POST)
+        if contact_form.is_valid():
+            new_comment = contact_form.save(commit=False)
+            name = contact_form.cleaned_data.get('name')
+            email = contact_form.cleaned_data.get('email')
+            comment_s = contact_form.cleaned_data.get('comment')
+            new_comment.name = name
+            new_comment.email = email
+            new_comment.comment = comment_s
+            # Save the comment to the database
+            new_comment.save()
+            messages.success(request, 'خیلی ممنون ، به زودی با شما تماس خواهیم گرفت')
+            return redirect('/contact-us/')
+    else:
+        contact_form = ContactForm()
+
     context = {
-        'form': form_detail,
+        'contact_form': contact_form,
     }
+
     return render(request, 'tricks/django-tricks.html', context)
 
 

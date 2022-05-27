@@ -17,6 +17,10 @@ class CategoryClass(models.Model):
     def get_absolute_url(self):
         return reverse('blog:slug', args=[str(self.slug)])
 
+    class Meta:
+        verbose_name = 'category'
+        verbose_name_plural = "category's"
+
     def __str__(self):
         return self.name
 
@@ -129,3 +133,20 @@ class DjangoTricksDaily(models.Model):
 
     def __str__(self):
         return self.test
+
+
+class ContactUs(models.Model):
+    name = models.CharField(max_length=100, blank=False)
+    email = models.EmailField(default=None, blank=False)
+    title = models.CharField(max_length=150, blank=False)
+    comment = models.TextField(max_length=400, blank=False)
+    created_on = models.DateTimeField(auto_now_add=True)
+    status = models.BooleanField(default=False, verbose_name='وضعیت')
+
+    class Meta:
+        ordering = ['created_on']
+        verbose_name = 'contact us'
+        verbose_name_plural = 'contact us'
+
+    def __str__(self):
+        return f'{self.comment[:60]} --> {self.title[:20]} | {self.status}'

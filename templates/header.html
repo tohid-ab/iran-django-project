@@ -5,6 +5,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="keywords" content="django,جنگو,جنگو فارسی,ایران جنگو"/>
+    <meta name="description" content="ایران جنگو یکی از بهترین وب سایت های آموزشی جنگو در انجمن فارسی ایران">
     <link rel="stylesheet" href="{% static 'css/css/bootstrap.min.css' %}">
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
     <link rel="stylesheet" href="{% static 'css/icons/fontawesome/css/all.min.css' %}">
@@ -12,7 +14,7 @@
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <link rel="icon" type="image/x-icon" href="{% static 'img/django-icon-0.jpg' %}">
-    <title>iran django</title>
+    <title>ایران جنگو</title>
 </head>
 <body>
      <header id="header">
@@ -23,29 +25,29 @@
         <div id="mySidenav" class="sidenav">
             <div id='Block-menu'>
                 <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-                <a class="image-responsive"><img src='{% static 'img/icons/django.jpg' %}'>
+                <a class="image-responsive"><img src='{% static 'img/icons/django.jpg' %}' alt="ایران جنگو">
                     <p style="margin-top: 21px;"></p>
                 </a>`
                 <br>
                 <br>
                 <div class='center-input'>
                     <form method="GET" action="{% url 'blog:search' %}">
-                        <button title="Search" value="" type="submit" class="button"><img src="{% static 'img/icons/icons8-search-60.png' %}"></button>
+                        <button title="Search" value="" type="submit" class="button"><img src="{% static 'img/icons/icons8-search-60.png' %}" alt="جنگو"></button>
                         <input type="text" name="Q" class="textbox" placeholder="دنبال چی میگردی؟">
                     </form>
                 </div>
                 <br>
                 <hr class="hr-respons-menu">
                 <br>
-                <a href="#" class='item-sidenav dark-them'><b>تم روشن</b><button class='item-header-style button-dark-them'><i class="fas fa-sun"></i></button></a>
+                <a href="#" class='item-sidenav dark-them'>تم روشن<button class='item-header-style button-dark-them'><i class="fas fa-sun"></i></button></a>
                 <br>
                 <hr class="hr-respons-menu">
                 <br>
                 <div class="box-item">
                     <a href="{% url 'blog:Home' %}" class='item-sidenav value-header'>صفحه اصلی&ensp;&ensp;<i class="fas fa-home-lg-alt"></i></a>
-                    <a href="{% url 'blog:Tricks' %}" class='item-sidenav value-header'>جنگو باگ<i class="fas fa-chalkboard-teacher"></i></a>
                     <a href="{% url 'blog:Article' %}" class='item-sidenav value-header'>مقالات آموزشی<i class="fas fa-chalkboard-teacher"></i></a>
                     <a href="{% url 'blog:free-project' %}" class='item-sidenav value-header'>پروژه های متن باز&ensp;&ensp;<i class="fas fa-drafting-compass"></i></a>
+                    <a href="{% url 'blog:Tricks' %}" class='item-sidenav value-header'>تماس با من<i class="fas fa-chalkboard-teacher"></i></a>
                     <a href="{% url 'blog:about-me' %}" class='item-sidenav value-header'>درباره من&ensp;&ensp;<i class="fas fa-address-card"></i></a>
                 </div>
             </div>
@@ -64,8 +66,12 @@
                                         <i class="fas fa-user"></i>
                                       </button>
                                       <ul class="dropdown-menu fucos" style="text-align: right;" aria-labelledby="dropdownMenuButton1">
-                                        <li><a class="dropdown-item" href="{% url 'account:dashboard' %}">پروفایل <i class="fas fa-user-circle"></i></a></li>
-                                        <li><a class="dropdown-item" href="{% url 'account:logout' %}?next={{request.path}}"> خروج <i class="far fa-sign-out"></i> </a></li>
+                                        <li>
+                                            <a class="dropdown-item" href="{% url 'account:dashboard' %}">پروفایل <i class="fas fa-user-circle"></i></a>
+                                        </li>
+                                        <li>
+                                            <a class="dropdown-item" href="{% url 'account:logout' %}?next={{request.path}}"> خروج <i class="far fa-sign-out"></i> </a>
+                                        </li>
                                       </ul>
                                     </div>
                                     <button id="moon" class='item-header-style'><i class="fas fa-moon"></i></button>
@@ -96,14 +102,14 @@
                         <div class='col-8 search'>
                             <div class='center-input'>
                                 <form method="GET" action="{% url 'blog:search' %}">
-                                    <button title="Search" value="" type="submit" class="button"><img src="{% static 'img/icons/icons8-search-60.png' %}"></button>
+                                    <button title="Search" value="" type="submit" class="button"><img src="{% static 'img/icons/icons8-search-60.png' %}" alt="جنگو"></button>
                                     <input type="text" name="Q" class="textbox" placeholder="دنبال چی میگردی؟">
                                 </form>
                             </div>
                         </div>
                         <div class='col-2 logo'>
                             <div class='image-django'>
-                                <img src='{% static 'img/icons/django.jpg' %}'>
+                                <img src='{% static 'img/icons/django.jpg' %}' alt="جنگو, ایران جنگو">
                             </div>
                         </div>
                         <div class='responsive-activate'>
@@ -138,7 +144,7 @@
                             </div>
                             <div class='col-3'>
                                 <div class="item-header-right">
-                                    <button class='item-header-style-right' onclick="openNav()"><img src="{% static 'img/icons/icons8-menu-60.png' %}" alt=""></button>
+                                    <button class='item-header-style-right' onclick="openNav()"><img src="{% static 'img/icons/icons8-menu-60.png' %}" alt="جنگو"></button>
                                 </div>
                             </div>
                         </div>
@@ -160,13 +166,13 @@
                                     <a class="nav-link" href="{% url 'blog:about-me' %}">درباره من</a>
                                 </li>
                                 <li class="nav-item-under">
+                                    <a class="nav-link" href="{% url 'blog:Tricks' %}">تماس با من</a>
+                                </li>
+                                <li class="nav-item-under">
                                     <a class="nav-link" href="{% url 'blog:free-project' %}">پروژه های متن باز</a>
                                 </li>
                                 <li class="nav-item-under">
                                     <a class="nav-link" href="{% url 'blog:Article' %}">مقالات آموزشی</a>
-                                </li>
-                                <li class="nav-item-under">
-                                    <a class="nav-link" href="{% url 'blog:Tricks' %}">جنگو باگ</a>
                                 </li>
                                 <li class="nav-item-under">
                                     <a class="nav-link" href="{% url 'blog:Home' %}">صفحه اصلی</a>

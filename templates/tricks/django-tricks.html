@@ -1,12 +1,54 @@
 {% extends 'header.html' %}
 {% load static %}
+{% load widget_tweaks %}
 {% block content %}
-
-    <div style="width: 75%; margin: 111px auto;text-align: center" class="alert alert-warning d-flex align-items-center" role="alert">
-      <div style="width: 100%">
-        این  بخش به زودی فعال میشود
-          {{ form.test }}
-      </div>
-    </div>
-
+    <!-- main html -->
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-success alert-dismissible fade show" style="width: 60%;margin: 30px auto;" role="alert">
+              {{ message }}
+              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        {% endfor %}
+    {% endif %}
+    <main>
+        <div class="container main-impo">
+            <div class="image-photo">
+                <img src="{% static 'img/contact-min.png' %}" alt="" class='main-image'>
+            </div>
+            <div class="text-header-main" style="direction: rtl;">
+                <p class="text-info-lorem">تماس با من</p>
+                <div class="container">
+                <form method="post">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        <label class="form-label" for="fname">نام</label>
+                         {% render_field contact_form.name|add_class:"form-control" id='id_name_js' placeholder="نام" %}
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label" for="lname">ایمیل</label>
+                        {% render_field contact_form.email|add_class:"form-control" id='id_email_js' placeholder="ایمیل" %}
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label" for="lname">موضوع</label>
+                        {% render_field contact_form.title|add_class:"form-control" id='id_title_js' placeholder="موضوع" %}
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label" for="subject">پیام</label>
+                        {% render_field contact_form.comment|add_class:"form-control" id='id_comment_js' placeholder="پیام ..." %}
+                    </div>
+                      <button type="submit" class="btn btn-primary">ارسال</button>
+                  </form>
+                </div>
+            </div>
+        </div>
+    </main>
+        <script>
+        window.onload = function() {
+          document.getElementById('id_name_js').value = '';
+          document.getElementById('id_email_js').value = '';
+          document.getElementById('id_title_js').value = '';
+          document.getElementById('id_comment_js').value = '';
+          }
+    </script>
 {% endblock content %}
