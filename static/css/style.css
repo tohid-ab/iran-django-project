@@ -422,6 +422,15 @@ form > .button {
     justify-content: space-evenly;
 }
 
+.header-article a{
+    font-family: Lalezar;
+}
+
+.header-article p{
+    font-family: Lalezar;
+}
+
+
 .news-header-article{
     width: 100%;
     height: 16em;
@@ -485,6 +494,7 @@ form > .button {
     padding: 4px 5px;
     transition: 0.3s;
     border: none;
+    font-family: Lalezar;
 }
 
 .btn-news-like-heart:hover {

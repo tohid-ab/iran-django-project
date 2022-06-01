@@ -55,6 +55,11 @@ class RoadMapDjangoAdmin(SummernoteModelAdmin):
     summernote_fields = ('text',)
 
 
+class IpAdmin(SummernoteModelAdmin):
+    list_display = ('userName', 'userIp', 'get_jalali_date', 'item',)
+    search_fields = ('userIp',)
+
+
 admin.site.register(CategoryClass, CategoryAdmin)
 admin.site.register(Comment, Comments)
 admin.site.register(ReplyComment)
@@ -64,3 +69,4 @@ admin.site.register(DjangoRoadMap, RoadMapDjangoAdmin)
 admin.site.register(Like)
 admin.site.register(DjangoTricksDaily)
 admin.site.register(ContactUs)
+admin.site.register(IpUserToView, IpAdmin)

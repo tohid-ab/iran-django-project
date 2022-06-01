@@ -39,7 +39,7 @@
                                         </div>
                                         <div>
                                             <a class="btn-news"> <i class="fal fa-watch"></i> زمان مطالعه: 8 دقیقه</a>
-                                            <a class="btn-news-like" href="#" role="button">3 <i class="far fa-comment"></i></a>
+                                            <a class="btn-news-like" href="#" role="button">{{ articles.visite }} <i class="far fa-eye"></i></a>
                                                 {% if request.user.is_authenticated %}
                                                     <button onclick="likePost(this)" id="{{ articles.pk }}" class="btn-news-like-heart">
                                                       {{ articles.likes.count }}

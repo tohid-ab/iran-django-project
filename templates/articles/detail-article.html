@@ -28,6 +28,7 @@
                                         <p class="row-article"><i class="fad fa-blinds"></i>دسته بندی ها: {% for categorys in data.category.all %} <span class="tag tag-red">{{ categorys.name }}</span> {% endfor %}</p>
                                         <p class="row-article"><i class="fad fa-calendar-check"></i>تاریخ: {{ data.get_jalali_date|date:"Y/m/d" }}</p>
                                         <p class="row-article"><i class="fad fa-user-edit"></i> نویسنده: {{ data.user.first_name }} {{ data.user.last_name }}</p>
+                                        <p class="row-article"><i class="far fa-eye"></i> تعداد بازدید: {{ data.visite }}</p>
                                     </div>
                                 </div>
                         </div>

@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse, HttpResponseRedirect
 from . models import *
+from datetime import date
 from django.db.models import Q
 from django.contrib.auth.models import User
 from .forms import CommentForm, ContactForm
@@ -27,6 +28,15 @@ def like(request):
         liked = False
 
     return JsonResponse({'liked': liked})
+
+
+def get_client_ip(request):
+    x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
+    if x_forwarded_for:
+        ip = x_forwarded_for.split(',')[0]
+    else:
+        ip = request.META.get('REMOTE_ADDR')
+    return ip
 
 
 def home_page(request):
@@ -105,6 +115,21 @@ def article_page(request):
 
 def detail_article(request, slug):
     data = get_object_or_404(ArticleClass, slug=slug)
+    user_ip = get_client_ip(request)
+    date_now = date.today()
+    person_ip = IpUserToView.objects.filter(item=data, userIp=user_ip)
+    if not person_ip.filter(date_visite__startswith=date_now).exists():
+        data.visite += 1
+        data.save()
+    try:
+        user_name = request.user.get_username()
+        if user_name == "":
+            user_name = request.user
+    except:
+        user_name = "None"
+    ip: IpUserToView = IpUserToView(
+        item=data, userIp=user_ip, userName=user_name)
+    ip.save()
     # سیستم کامنت
     comment = Comment.objects.filter(post=data, status=True).order_by('-created_on')
     new_comment = None

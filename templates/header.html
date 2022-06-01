@@ -25,7 +25,7 @@
         <div id="mySidenav" class="sidenav">
             <div id='Block-menu'>
                 <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-                <a class="image-responsive"><img src='{% static 'img/icons/django.jpg' %}' alt="ایران جنگو">
+                <a href="{% url 'blog:Home' %}" class="image-responsive"><img src='{% static 'img/icons/django.jpg' %}' alt="ایران جنگو">
                     <p style="margin-top: 21px;"></p>
                 </a>`
                 <br>
@@ -109,7 +109,9 @@
                         </div>
                         <div class='col-2 logo'>
                             <div class='image-django'>
-                                <img src='{% static 'img/icons/django.jpg' %}' alt="جنگو, ایران جنگو">
+                                <a href="{% url 'blog:Home' %}">
+                                    <img src='{% static 'img/icons/django.jpg' %}' alt="جنگو django">
+                                </a>
                             </div>
                         </div>
                         <div class='responsive-activate'>
@@ -139,7 +141,9 @@
                             </div>
                             <div class='col-6'>
                                 <div class='image-django'>
-                                    <img src='{% static 'img/icons/django.jpg' %}' alt="جنگو django">
+                                    <a href="{% url 'blog:Home' %}">
+                                        <img src='{% static 'img/icons/django.jpg' %}' alt="جنگو django">
+                                    </a>
                                 </div>
                             </div>
                             <div class='col-3'>

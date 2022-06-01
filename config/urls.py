@@ -20,6 +20,7 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('authenticate/', include('django.contrib.auth.urls')),
     path('authenticate/', include('accounts.urls'), name='profile'),
     path('summernote/', include('django_summernote.urls')),
     path('', include('social_django.urls', namespace='social')),

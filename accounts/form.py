@@ -24,6 +24,7 @@ class LoginForm(forms.ModelForm):
 
 
 class UserRegistrationForm(forms.ModelForm):
+    email = forms.CharField(required=True)
     password = forms.CharField()
     password2 = forms.CharField()
 

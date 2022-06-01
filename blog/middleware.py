@@ -1,4 +1,4 @@
-from .models import IpAddress
+from .models import IPAddress
 
 
 class SaveIPAddressMiddleware:
@@ -9,16 +9,16 @@ class SaveIPAddressMiddleware:
     def __call__(self, request):
         # Code to be executed for each request before
         # the view (and later middleware) are called.
-
-        x_forwarded_for = request.META.get('HTTP X_FORWARDED_FOR')
+        x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
         if x_forwarded_for:
             ip = x_forwarded_for.split(',')[0]
         else:
-            ip = request.META.get('REMOTE ADDR')
+            ip = request.META.get('REMOTE_ADDR')
+
         try:
-            ip_address = IpAddress.objects.get(ip_address=ip)
-        except IpAddress.DoesNotExist:
-            ip_address = IpAddress(ip_address=ip)
+            ip_address = IPAddress.objects.get(ip_address=ip)
+        except IPAddress.DoesNotExist:
+            ip_address = IPAddress(ip_address=ip)
             ip_address.save()
         request.user.ip_address = ip_address
 

@@ -173,6 +173,9 @@ X_FRAME_OPTIONS = 'SAMEORIGIN'
 LOGIN_REDIRECT_URL = 'blog:Home'
 LOGOUT_REDIRECT_URL = 'account:login'
 
+EMAIL_BACKEND = "django.core.mail.backends.filebased.EmailBackend"
+EMAIL_FILE_PATH = BASE_DIR / "sent_emails"
+
 # google setUp login
 
 AUTHENTICATION_BACKENDS = (

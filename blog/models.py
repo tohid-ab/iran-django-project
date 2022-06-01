@@ -18,8 +18,8 @@ class CategoryClass(models.Model):
         return reverse('blog:slug', args=[str(self.slug)])
 
     class Meta:
-        verbose_name = 'category'
-        verbose_name_plural = "category's"
+        verbose_name = 'دسته بندی'
+        verbose_name_plural = "دسته بندی ها"
 
     def __str__(self):
         return self.name
@@ -37,13 +37,15 @@ class ArticleClass(models.Model):
     slug = models.SlugField(max_length=255, verbose_name='لینک', name='slug', null=True)
     description = models.TextField(verbose_name='متن مقاله', name='description', null=True)
     image = models.ImageField(upload_to='article/%Y/%m/%d', blank=True, verbose_name='عکس', name='image', null=True)
+    read_time = models.IntegerField(default=1, blank=False)
+    visite = models.IntegerField(verbose_name="تعداد بازدید", blank=False, null=False, default=0)
     created = models.DateTimeField(auto_now_add=True, verbose_name='زمان ساخت', name='created')
     updated = models.DateTimeField(auto_now=True, verbose_name='آخرین آپدیت', name='update')
 
     class Meta:
         ordering = ('-created',)
-        verbose_name = 'Article'
-        verbose_name_plural = 'Articles'
+        verbose_name = 'مقاله'
+        verbose_name_plural = 'مقالات'
 
     def __str__(self):
         return self.title
@@ -53,6 +55,23 @@ class ArticleClass(models.Model):
 
     def get_jalali_date(self):
         return datetime2jalali(self.created)
+
+
+class IpUserToView(models.Model):
+    userName = models.CharField(max_length=225, default="None", null=True, blank=True, verbose_name="نام کاربر")
+    userIp = models.CharField(max_length=15, default="000,000,000,000", null=False, blank=False, verbose_name="IP کاربر")
+    date_visite = models.DateTimeField(auto_now_add=True)
+    item = models.ForeignKey(ArticleClass, on_delete=models.CASCADE, verbose_name="آیتم؟")
+
+    def __str__(self):
+        return f"{self.userName} | {self.userIp} | {self.date_visite} | {self.item}"
+
+    class Meta:
+        verbose_name = "آدرس IP کاربر"
+        verbose_name_plural = "آدرس های IP کاربران"
+
+    def get_jalali_date(self):
+        return datetime2jalali(self.date_visite)
 
 
 class Comment(models.Model):
@@ -65,6 +84,8 @@ class Comment(models.Model):
 
     class Meta:
         ordering = ['created_on']
+        verbose_name = 'کامنت'
+        verbose_name_plural = 'کامنت ها'
 
     def __str__(self):
         return f'{self.comment[:60]} --> {self.post.title[:20]} | {self.status}'
@@ -79,6 +100,10 @@ class ReplyComment(models.Model):
     def __str__(self):
         return f'{self.r_comment} -> {self.text[:30]}'
 
+    class Meta:
+        verbose_name = 'پاسخ کامنت'
+        verbose_name_plural = 'پاسخ کامنت ها'
+
 
 class Like(models.Model):
     user_id = models.ForeignKey(User, on_delete=models.CASCADE, related_name='likes')
@@ -87,6 +112,10 @@ class Like(models.Model):
 
     def __str__(self):
         return f'{self.user_id.username} --> {self.post_id.id} | post_user: {self.post_id.user}'
+
+    class Meta:
+        verbose_name = 'لایک'
+        verbose_name_plural = 'لایک ها'
 
 
 class DjangoTricks(models.Model):
@@ -112,8 +141,8 @@ class AskedQuestions(models.Model):
 
     class Meta:
         ordering = ('created',)
-        verbose_name = 'Question'
-        verbose_name_plural = 'Questions'
+        verbose_name = 'سوال'
+        verbose_name_plural = 'سوال های پرتکرار'
 
     def __str__(self):
         return f'ID:{self.id} title: {self.title}'
@@ -145,8 +174,8 @@ class ContactUs(models.Model):
 
     class Meta:
         ordering = ['created_on']
-        verbose_name = 'contact us'
-        verbose_name_plural = 'contact us'
+        verbose_name = 'تماس با ما'
+        verbose_name_plural = 'تماس با ما'
 
     def __str__(self):
         return f'{self.comment[:60]} --> {self.title[:20]} | {self.status}'

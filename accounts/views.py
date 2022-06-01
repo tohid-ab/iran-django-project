@@ -2,6 +2,9 @@ from django.shortcuts import render, redirect, reverse
 from django.contrib.auth import authenticate, login
 from .form import UserRegistrationForm, LoginForm
 from django.contrib import messages
+from django.contrib.auth.forms import PasswordChangeForm
+from django.contrib.auth.views import PasswordChangeView
+from django.urls import reverse_lazy
 # Create your views here.
 
 
@@ -52,3 +55,9 @@ def profile_user(request):
             return redirect('blog:Home')
         else:
             return render(request, 'registration/profile.html')
+
+
+class PasswordChangeViews(PasswordChangeView):
+    form_class = PasswordChangeForm
+    success_url = reverse_lazy('password_success')
+    template_name = 'registration/password_change.html'
