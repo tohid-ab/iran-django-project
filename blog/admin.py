@@ -60,6 +60,19 @@ class IpAdmin(SummernoteModelAdmin):
     search_fields = ('userIp',)
 
 
+class ContactUsAdmin(admin.ModelAdmin):
+    list_display = ('name', 'email', 'title', 'status',)
+    list_filter = ('status',)
+
+
+class ProjectAdmin(SummernoteModelAdmin):
+    list_display = ('title', 'slug', 'get_jalali_date', 'status',)
+    list_filter = ('created',)
+    list_editable = ('status',)
+    summernote_fields = ('description',)
+    prepopulated_fields = {'slug': ('title',)}
+
+
 admin.site.register(CategoryClass, CategoryAdmin)
 admin.site.register(Comment, Comments)
 admin.site.register(ReplyComment)
@@ -68,5 +81,6 @@ admin.site.register(AskedQuestions, AskedQuestionsAdmin)
 admin.site.register(DjangoRoadMap, RoadMapDjangoAdmin)
 admin.site.register(Like)
 admin.site.register(DjangoTricksDaily)
-admin.site.register(ContactUs)
+admin.site.register(ContactUs, ContactUsAdmin)
 admin.site.register(IpUserToView, IpAdmin)
+admin.site.register(ProjectSourceClass, ProjectAdmin)

@@ -1,11 +1,39 @@
 {% extends 'header.html' %}
 {% load static %}
 {% block content %}
-
-    <div style="width: 75%; margin: 111px auto;text-align: center" class="alert alert-warning d-flex align-items-center" role="alert">
-      <div style="width: 100%">
-        این  بخش به زودی فعال میشود
-      </div>
-    </div>
-
-{% endblock content %}
+    <main class="font-article">
+        <div class="container">
+            <div class="box-article">
+                <div class="left-menu">
+                    <div class="article-list">
+                        <div class="header-article-page">
+                            {% for articles in model %}
+                                <div class="thumbnail-image-back-page concerted">
+                                    <div class="thumbnail-image-page concerted" style="background-image: url({{ articles.image.url }})">
+                                    </div>
+                                    <div class="info-news">
+                                        <p class="time-data">{{ articles.get_jalali_date|date:"Y/m/d" }}</p>
+                                        <div style="height: 4rem;margin: 0 0 27px 0;">
+                                            <p class="title-news"><a href="{{ articles.get_absolute_url }}">{{ articles.title }}</a></p>
+                                        </div>
+                                        <div>
+                                            <a class="btn-news-like" href="#" role="button">{{ articles.visite }} <i class="far fa-eye"></i></a>
+                                        </div><br>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+                <div class="right-menu">
+                    <div class="category-list-article">
+                        <p class="category-name">دسته‌بندی مقالات</p>
+                        <hr>
+                        <p class="programing">دسته بندی</p>
+                            <p class="list-category"><a href="{% url 'blog:free-project' %}">همه پروژه ها</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+{% endblock %}

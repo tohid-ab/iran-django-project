@@ -1,0 +1,49 @@
+{% extends 'header.html' %}
+{% load widget_tweaks %}
+{% load static %}
+{% block content %}
+    <main>
+        <div class="container">
+            <div class="box-article">
+                <div class="right-menu">
+                    <div class="category-list">
+                        <p class="text-category">آخرین پروژه ها</p>
+                        {% for suggested in model %}
+                            <div class="new-article">
+                                <div class="text-a">
+                                    <p class="title-suggested"><a href="{{ suggested.get_absolute_url }}">{{ suggested.title }}</a> </p>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="left-menu">
+                    <div class="data-detail-article">
+                        <div id="nav-article-detail">
+                                <div class="navbar-article-detail">
+                                    <div class="item-title-article-detail">
+                                        <h3>{{ data.title }}</h3>
+                                    </div> <br>
+                                    <div class="item-list-article-detail">
+                                        <p class="row-article"><i class="fad fa-calendar-check"></i>تاریخ: {{ data.get_jalali_date|date:"Y/m/d" }}</p>
+                                        <p class="row-article"><i class="fad fa-user-edit"></i> نویسنده: {{ data.user.first_name }} {{ data.user.last_name }}</p>
+                                        <p class="row-article"><i class="far fa-eye"></i> تعداد بازدید: {{ data.visite }}</p>
+                                    </div>
+                                </div>
+                        </div>
+                        <img class="image-article-detail" src="{{ data.image.url }}" alt="slm,jdscnsdnc">
+                        <div class="data-detail">
+                            {{ data.description|safe }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <script>
+        window.onload = function() {
+          document.getElementById('id_name_js').value = '';
+          document.getElementById('id_comment_js').value = '';
+          }
+    </script>
+{% endblock %}

@@ -43,6 +43,7 @@ def home_page(request):
     if request.user.is_authenticated:
         article = ArticleClass.objects.filter(status='Activate')[0:3]
         article_block = ArticleClass.objects.filter(status='Activate')[0:2]
+        model = ProjectSourceClass.objects.filter(status='Activate')[0:3]
         video_tricks = DjangoTricks.objects.all()[0:2]
         questions = AskedQuestions.objects.all()
         road_map = DjangoRoadMap.objects.all()
@@ -57,11 +58,13 @@ def home_page(request):
             'question': questions,
             'map': road_map,
             'liked_posts': liked_posts,
+            'model': model,
         }
         return render(request, 'index.html', context)
     else:
         article = ArticleClass.objects.filter(status='Activate')[0:3]
         article_block = ArticleClass.objects.filter(status='Activate')[0:2]
+        model = ProjectSourceClass.objects.filter(status='Activate')[0:3]
         video_tricks = DjangoTricks.objects.all()[0:2]
         questions = AskedQuestions.objects.all()
         road_map = DjangoRoadMap.objects.all()
@@ -71,6 +74,7 @@ def home_page(request):
             'video': video_tricks,
             'question': questions,
             'map': road_map,
+            'model': model,
         }
         return render(request, 'index.html', context)
 
@@ -168,7 +172,22 @@ def detail_article(request, slug):
 
 
 def free_project(request):
-    return render(request, 'projects/free-project.html')
+    model = ProjectSourceClass.objects.filter(status='Activate')
+    context = {
+        'model': model,
+    }
+    return render(request, 'projects/free-project.html', context)
+
+
+def detail_free_project(request, slug):
+    data = get_object_or_404(ProjectSourceClass, slug=slug)
+    suggested_article = ProjectSourceClass.objects.filter(status='Activate')[0:4]
+
+    context = {
+        'data': data,
+        'model': suggested_article,
+    }
+    return render(request, 'projects/detail-project.html', context)
 
 
 class SearchBox(ListView):
@@ -242,7 +261,7 @@ def trick_page(request):
             new_comment.comment = comment_s
             # Save the comment to the database
             new_comment.save()
-            messages.success(request, 'خیلی ممنون ، به زودی با شما تماس خواهیم گرفت')
+            messages.success(request, 'با تموم سرعت پیامتو میبینم')
             return redirect('/contact-us/')
     else:
         contact_form = ContactForm()
@@ -254,6 +273,8 @@ def trick_page(request):
     return render(request, 'tricks/django-tricks.html', context)
 
 
+def error_404(request, exception):
+    return render(request, '404.html')
 
 
 

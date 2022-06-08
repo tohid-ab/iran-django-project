@@ -7,6 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="keywords" content="django,جنگو,جنگو فارسی,ایران جنگو"/>
     <meta name="description" content="ایران جنگو یکی از بهترین وب سایت های آموزشی جنگو در انجمن فارسی ایران">
+    <meta name="description" content="توحید ابریان">
+    <meta name="description" content="tohid abrian">
     <link rel="stylesheet" href="{% static 'css/css/bootstrap.min.css' %}">
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
     <link rel="stylesheet" href="{% static 'css/icons/fontawesome/css/all.min.css' %}">
@@ -46,9 +48,10 @@
                 <div class="box-item">
                     <a href="{% url 'blog:Home' %}" class='item-sidenav value-header'>صفحه اصلی&ensp;&ensp;<i class="fas fa-home-lg-alt"></i></a>
                     <a href="{% url 'blog:Article' %}" class='item-sidenav value-header'>مقالات آموزشی<i class="fas fa-chalkboard-teacher"></i></a>
-                    <a href="{% url 'blog:free-project' %}" class='item-sidenav value-header'>پروژه های متن باز&ensp;&ensp;<i class="fas fa-drafting-compass"></i></a>
+                    <a href="{% url 'blog:free-project' %}" class='item-sidenav value-header'>پروژه متن باز<i class="fas fa-chalkboard-teacher"></i></a>
                     <a href="{% url 'blog:Tricks' %}" class='item-sidenav value-header'>تماس با من<i class="fas fa-chalkboard-teacher"></i></a>
                     <a href="{% url 'blog:about-me' %}" class='item-sidenav value-header'>درباره من&ensp;&ensp;<i class="fas fa-address-card"></i></a>
+                    <a href="https://idpay.ir/pasargad-sarmaye" class='item-sidenav value-header'>حمایت مالی&ensp;&ensp;<i class="fas fa-drafting-compass"></i></a>
                 </div>
             </div>
         </div>
@@ -167,13 +170,16 @@
                         <div class='col-12'>
                             <ul class="navbar-under">
                                 <li class="nav-item-under">
+                                    <a class="nav-link" href="https://idpay.ir/pasargad-sarmaye">حمایت مالی</a>
+                                </li>
+                                <li class="nav-item-under">
                                     <a class="nav-link" href="{% url 'blog:about-me' %}">درباره من</a>
                                 </li>
                                 <li class="nav-item-under">
                                     <a class="nav-link" href="{% url 'blog:Tricks' %}">تماس با من</a>
                                 </li>
                                 <li class="nav-item-under">
-                                    <a class="nav-link" href="{% url 'blog:free-project' %}">پروژه های متن باز</a>
+                                    <a class="nav-link" href="{% url 'blog:free-project' %}">پروژه متن باز</a>
                                 </li>
                                 <li class="nav-item-under">
                                     <a class="nav-link" href="{% url 'blog:Article' %}">مقالات آموزشی</a>

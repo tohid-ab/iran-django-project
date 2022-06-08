@@ -1526,6 +1526,10 @@ form > .button {
         margin: -17px 0;
     }
 
+    .panel-design-show {
+        width: 100%;
+    }
+
     /* main responsive */
 
     /*registration page*/

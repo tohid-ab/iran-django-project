@@ -178,4 +178,34 @@ class ContactUs(models.Model):
         verbose_name_plural = 'تماس با ما'
 
     def __str__(self):
-        return f'{self.comment[:60]} --> {self.title[:20]} | {self.status}'
+        return self.title
+
+
+class ProjectSourceClass(models.Model):
+    STATUS_CHOICES = (
+        ('Activate', 'فعال'),
+        ('Deactivate', 'غیر فعال'),
+    )
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=False, verbose_name='user')
+    status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='Deactivate', verbose_name='وضعیت')
+    title = models.CharField(max_length=255, verbose_name='عنوان پروژه', name='title', null=True)
+    slug = models.SlugField(max_length=255, verbose_name='لینک', name='slug', null=True)
+    description = models.TextField(verbose_name='متن پروژه', name='description', null=True)
+    image = models.ImageField(upload_to='article/%Y/%m/%d', blank=True, verbose_name='عکس', name='image', null=True)
+    visite = models.IntegerField(verbose_name="تعداد بازدید", blank=False, null=False, default=0)
+    created = models.DateTimeField(auto_now_add=True, verbose_name='زمان ساخت', name='created')
+    updated = models.DateTimeField(auto_now=True, verbose_name='آخرین آپدیت', name='update')
+
+    class Meta:
+        ordering = ('-created',)
+        verbose_name = 'پروژه'
+        verbose_name_plural = 'پروژه ها'
+
+    def __str__(self):
+        return self.title
+
+    def get_absolute_url(self):
+        return reverse("blog:detail-project", args=[str(self.slug)])
+
+    def get_jalali_date(self):
+        return datetime2jalali(self.created)

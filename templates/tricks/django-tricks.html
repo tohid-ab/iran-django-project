@@ -5,9 +5,9 @@
     <!-- main html -->
     {% if messages %}
         {% for message in messages %}
-            <div class="alert alert-success alert-dismissible fade show" style="width: 60%;margin: 30px auto;" role="alert">
-              {{ message }}
-              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            <div class="alert alert-success alert-dismissible fade show" style="width: 60%;margin: 30px auto;text-align: right;" role="alert">
+              {{ message }}&#128513;
+              <button style="left: 0" type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
         {% endfor %}
     {% endif %}
@@ -17,7 +17,7 @@
                 <img src="{% static 'img/contact-min.png' %}" alt="" class='main-image'>
             </div>
             <div class="text-header-main" style="direction: rtl;background-image: url({% static 'img/—Pngtree—geometric shapes patterns vector_3553180.png' %})">
-                <p class="text-info-lorem">تماس با من</p>
+                <p class="text-info-lorem"> تماس با من</p>
                 <div class="container">
                 <form method="post">
                     {% csrf_token %}

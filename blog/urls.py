@@ -12,5 +12,7 @@ urlpatterns = [
     path('articles/<slug:slug>', views.detail_article, name='detail-article'),
     path('articles/serach/', views.SearchBox.as_view(), name='search'),
     path('free-project/', views.free_project, name='free-project'),
+    path('free-project/<slug:slug>', views.detail_free_project, name='detail-project'),
+
     path('about-me/', views.about_me, name='about-me'),
 ]
