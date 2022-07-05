@@ -9,7 +9,8 @@
                     <div class="article-list">
                         <div class="header-article-page">
                             {% for articles in object_list %}
-                                <div class="thumbnail-image-back-page concerted">
+                                {% if object_list %}
+                                    <div class="thumbnail-image-back-page concerted">
                                     <div class="thumbnail-image-page concerted" style="background-image: url({{ articles.image.url }})">
                                     </div>
                                     <div class="info-news">
@@ -86,6 +87,11 @@
                                         </div>
                                     </div>
                                 </div>
+                                {% endif %}
+                                {% empty %}
+                                    <div class="alert alert-warning alert-dismissible fade show" style="width: 60%;margin: 30px auto;text-align: right;" role="alert">
+                                        چیزی یافت نشد &#128513;
+                                    </div>
                             {% endfor %}
                         </div>
                     </div>
@@ -96,7 +102,7 @@
                         <hr>
                         <p class="programing">دسته بندی</p>
                         {% for categorys in category %}
-                            <p class="list-category">{{ categorys.name }}</p>
+                            <p class="list-category"><a href="{{ categorys.get_absolute_url }}">{{ categorys.name }}</a></p>
                         {% endfor %}
 
                     </div>

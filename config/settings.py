@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'django_summernote',
     'widget_tweaks',
     'social_django',
+    'constance',
 ]
 
 JALALI_DATE_DEFAULTS = {
@@ -54,14 +55,7 @@ JALALI_DATE_DEFAULTS = {
     },
     'Static': {
         'js': [
-            # loading datepicker
             'admin/js/django_jalali.min.js',
-            # OR
-            # 'admin/jquery.ui.datepicker.jalali/scripts/jquery.ui.core.js',
-            # 'admin/jquery.ui.datepicker.jalali/scripts/calendar.js',
-            # 'admin/jquery.ui.datepicker.jalali/scripts/jquery.ui.datepicker-cc.js',
-            # 'admin/jquery.ui.datepicker.jalali/scripts/jquery.ui.datepicker-cc-fa.js',
-            # 'admin/js/main.js',
         ],
         'css': {
             'all': [
@@ -173,8 +167,7 @@ X_FRAME_OPTIONS = 'SAMEORIGIN'
 LOGIN_REDIRECT_URL = 'blog:Home'
 LOGOUT_REDIRECT_URL = 'account:login'
 
-EMAIL_BACKEND = "django.core.mail.backends.filebased.EmailBackend"
-EMAIL_FILE_PATH = BASE_DIR / "sent_emails"
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 # google setUp login
 

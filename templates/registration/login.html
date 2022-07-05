@@ -9,17 +9,29 @@
     {% endif %}
 <div class="login-form">
     <h2 style="text-align: center">ورود به سایت</h2>
+    {% if form.errors %}
+        <script>
+            Swal.fire({
+                title: 'نام کاربری یا رمز عبور اشتباه میباشد',
+                icon: 'error',
+                showConfirmButton: false,
+              didOpen: function () {
+                setTimeout(function () {
+                  Swal.close()
+                }, 4000)
+              }
+            })
+        </script>
+    {% endif %}
     <form method="POST">
     {% csrf_token %}
       <div class="mb-3">
         <label for="exampleInputEmail1" class="form-label">نام کاربری</label>
         {% render_field form.username|add_class:"form-control" placeholder="نام کاربری" %}
-           {{form.username.errors}}
       </div>
       <div class="mb-3">
         <label for="exampleInputPassword1" class="form-label">رمز عبور</label>
         {% render_field form.password|add_class:"form-control" type='password' placeholder="رمز عبور" %}
-          {{form.password.errors}}
       </div>
         <p><a href="{% url 'password_reset' %}" class="forg-rejis">رمز عبور خود را فراموش کرده اید؟</a></p>
         <button type="submit" class="btn btn-primary">ورود</button>

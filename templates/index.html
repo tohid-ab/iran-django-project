@@ -13,7 +13,7 @@
                 و مجله در ستون و سطرآنچنان که لازم است و  ابزارهای
                 کاربردی می باشد</p>
                 <div class="button-join">
-                    <p><i class="fas fa-map-marker-alt"></i> به ما پیوندید</p>
+                    <p><a style="color: white;text-decoration: none" href="{% url 'account:register' %}"><i class="fas fa-map-marker-alt"></i> به ما پیوندید</a></p>
                 </div>
             </div>
         </div>
@@ -38,7 +38,7 @@
                                             <p class="title-news"><a href="{{ articles.get_absolute_url }}">{{ articles.title }}</a></p>
                                         </div>
                                         <div>
-                                            <a class="btn-news"> <i class="fal fa-watch"></i> زمان مطالعه: 8 دقیقه</a>
+                                            <a class="btn-news"> <i class="fal fa-watch"></i> زمان مطالعه: {{ articles.read_time }} دقیقه</a>
                                             <a class="btn-news-like" href="#" role="button">{{ articles.visite }} <i class="far fa-eye"></i></a>
                                                 {% if request.user.is_authenticated %}
                                                     <button onclick="likePost(this)" id="{{ articles.pk }}" class="btn-news-like-heart">
@@ -67,49 +67,48 @@
                                                         $('#{{ articles.pk }}').on("click",TestSweetAlert);
                                                     </script>
                                                 {% endif %}
-                                                <script>
-                                                    const likePost = function(button){
-
-                                                        post_id = $(button).attr('id');
-                                                        $.ajax({
-                                                            type:'POST',
-                                                            url: '{% url 'blog:like-post' %}',
-                                                            data: {
-                                                            'post_id': post_id,
-                                                            'csrfmiddlewaretoken': '{{ csrf_token }}'
-                                                            },
-
-                                                            success: function (response) {
-                                                                if(response.liked){
-                                                                    current_likes = parseInt($('#' + post_id).html()) ;
-                                                                    like_count = current_likes + 1
-                                                                    $(button).html(like_count + ' <i class="fas fa-heart"></i>');
-                                                                }
-                                                                else{
-                                                                    current_likes = parseInt($('#' + post_id).html()) ;
-                                                                    like_count = current_likes - 1
-                                                                    $(button).html(like_count + ' <i class="far fa-heart"></i>');
-                                                                };
-                                                            },
-
-                                                            error: () =>{
-                                                                console.log("sorry something went wrong");
-                                                            }
-                                                        })
-                                                    };
-                                                </script>
                                         </div>
                                     </div>
                                 </div>
                             {% endfor %}
+                            <script>
+                                const likePost = function(button){
 
+                                    post_id = $(button).attr('id');
+                                    $.ajax({
+                                        type:'POST',
+                                        url: '{% url 'blog:like-post' %}',
+                                        data: {
+                                        'post_id': post_id,
+                                        'csrfmiddlewaretoken': '{{ csrf_token }}'
+                                        },
+
+                                        success: function (response) {
+                                            if(response.liked){
+                                                current_likes = parseInt($('#' + post_id).html()) ;
+                                                like_count = current_likes + 1
+                                                $(button).html(like_count + ' <i class="fas fa-heart"></i>');
+                                            }
+                                            else{
+                                                current_likes = parseInt($('#' + post_id).html()) ;
+                                                like_count = current_likes - 1
+                                                $(button).html(like_count + ' <i class="far fa-heart"></i>');
+                                            };
+                                        },
+
+                                        error: () =>{
+                                            console.log("sorry something went wrong");
+                                        }
+                                    })
+                                };
+                            </script>
                     </div>
             </div>
         </div>
         <div class="container">
             <div class="title-article">
                 <p class="article-text">جدیدترین پروژه های متن باز</p>
-                <p class="seen-article">مشاهده همه ویدیو ها <i class="fas fa-arrow-to-left"></i></p>
+                <p class="seen-article">مشاهده همه پروژه ها <i class="fas fa-arrow-to-left"></i></p>
             </div>
             <div class="row row-cols-1 row-cols-md-2 g-4">
                 <div class="header-article">
@@ -123,8 +122,7 @@
                                     <p class="title-news"><a href="{{ articles.get_absolute_url }}">{{ articles.title }}</a></p>
                                 </div>
                                 <div>
-                                    <a class="btn-news-like" href="#" role="button">{{ articles.visite }} <i class="far fa-eye"></i></a>
-                                </div><br>
+                                </div>
                             </div>
                         </div>
                     {% endfor %}

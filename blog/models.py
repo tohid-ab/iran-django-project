@@ -37,7 +37,7 @@ class ArticleClass(models.Model):
     slug = models.SlugField(max_length=255, verbose_name='لینک', name='slug', null=True)
     description = models.TextField(verbose_name='متن مقاله', name='description', null=True)
     image = models.ImageField(upload_to='article/%Y/%m/%d', blank=True, verbose_name='عکس', name='image', null=True)
-    read_time = models.IntegerField(default=1, blank=False)
+    read_time = models.IntegerField(default=1, blank=False, verbose_name='زمان مطالعه')
     visite = models.IntegerField(verbose_name="تعداد بازدید", blank=False, null=False, default=0)
     created = models.DateTimeField(auto_now_add=True, verbose_name='زمان ساخت', name='created')
     updated = models.DateTimeField(auto_now=True, verbose_name='آخرین آپدیت', name='update')
@@ -68,7 +68,7 @@ class IpUserToView(models.Model):
 
     class Meta:
         verbose_name = "آدرس IP کاربر"
-        verbose_name_plural = "آدرس های IP کاربران"
+        verbose_name_plural = "آدرس های IP کاربران صفحه مقالات"
 
     def get_jalali_date(self):
         return datetime2jalali(self.date_visite)
@@ -168,7 +168,7 @@ class ContactUs(models.Model):
     name = models.CharField(max_length=100, blank=False)
     email = models.EmailField(default=None, blank=False)
     title = models.CharField(max_length=150, blank=False)
-    comment = models.TextField(max_length=400, blank=False)
+    comment = models.TextField(max_length=800, blank=False)
     created_on = models.DateTimeField(auto_now_add=True)
     status = models.BooleanField(default=False, verbose_name='وضعیت')
 
@@ -192,7 +192,6 @@ class ProjectSourceClass(models.Model):
     slug = models.SlugField(max_length=255, verbose_name='لینک', name='slug', null=True)
     description = models.TextField(verbose_name='متن پروژه', name='description', null=True)
     image = models.ImageField(upload_to='article/%Y/%m/%d', blank=True, verbose_name='عکس', name='image', null=True)
-    visite = models.IntegerField(verbose_name="تعداد بازدید", blank=False, null=False, default=0)
     created = models.DateTimeField(auto_now_add=True, verbose_name='زمان ساخت', name='created')
     updated = models.DateTimeField(auto_now=True, verbose_name='آخرین آپدیت', name='update')
 

@@ -40,13 +40,22 @@ def get_client_ip(request):
 
 
 def home_page(request):
+    article = ArticleClass.objects.filter(status='Activate')[0:3]
+    article_block = ArticleClass.objects.filter(status='Activate')[0:2]
+    model = ProjectSourceClass.objects.filter(status='Activate')[0:3]
+    category = CategoryClass.objects.all()[0:5]
+    video_tricks = DjangoTricks.objects.all()[0:2]
+    questions = AskedQuestions.objects.all()
+    road_map = DjangoRoadMap.objects.all()
+    context = {
+        'article': article,
+        'article_block': article_block,
+        'video': video_tricks,
+        'question': questions,
+        'map': road_map,
+        'model': model,
+    }
     if request.user.is_authenticated:
-        article = ArticleClass.objects.filter(status='Activate')[0:3]
-        article_block = ArticleClass.objects.filter(status='Activate')[0:2]
-        model = ProjectSourceClass.objects.filter(status='Activate')[0:3]
-        video_tricks = DjangoTricks.objects.all()[0:2]
-        questions = AskedQuestions.objects.all()
-        road_map = DjangoRoadMap.objects.all()
         # سیستم لایک
         liked_posts = []
         for liked_post in request.user.likes.all():
@@ -59,37 +68,26 @@ def home_page(request):
             'map': road_map,
             'liked_posts': liked_posts,
             'model': model,
+            'category': category,
         }
         return render(request, 'index.html', context)
-    else:
-        article = ArticleClass.objects.filter(status='Activate')[0:3]
-        article_block = ArticleClass.objects.filter(status='Activate')[0:2]
-        model = ProjectSourceClass.objects.filter(status='Activate')[0:3]
-        video_tricks = DjangoTricks.objects.all()[0:2]
-        questions = AskedQuestions.objects.all()
-        road_map = DjangoRoadMap.objects.all()
-        context = {
-            'article': article,
-            'article_block': article_block,
-            'video': video_tricks,
-            'question': questions,
-            'map': road_map,
-            'model': model,
-        }
-        return render(request, 'index.html', context)
+    return render(request, 'index.html', context)
 
 
 def article_page(request):
-
+    article = ArticleClass.objects.filter(status='Activate')
+    # pagination or صفحه بندی
+    paginator = Paginator(article, 6)
+    page_number = request.GET.get('page')
+    articles = paginator.get_page(page_number)
+    # دسته بندی
+    category_d = CategoryClass.objects.all()
+    # سیستم لایک
+    context = {
+        'category': category_d,
+        'pagination_article': articles,
+    }
     if request.user.is_authenticated:
-        article = ArticleClass.objects.filter(status='Activate')
-        # pagination or صفحه بندی
-        paginator = Paginator(article, 6)
-        page_number = request.GET.get('page')
-        articles = paginator.get_page(page_number)
-        # دسته بندی
-        category_d = CategoryClass.objects.all()
-        # سیستم لایک
         liked_posts = []
         for liked_post in request.user.likes.all():
             liked_posts.append(liked_post.post_id)
@@ -100,21 +98,7 @@ def article_page(request):
         }
         return render(request, 'articles/article.html', context)
 
-    else:
-        article = ArticleClass.objects.filter(status='Activate')
-        # pagination or صفحه بندی
-        paginator = Paginator(article, 6)
-        page_number = request.GET.get('page')
-        articles = paginator.get_page(page_number)
-        # دسته بندی
-        category_d = CategoryClass.objects.all()
-
-        context = {
-            'category': category_d,
-            'pagination_article': articles,
-        }
-
-        return render(request, 'articles/article.html', context)
+    return render(request, 'articles/article.html', context)
 
 
 def detail_article(request, slug):
@@ -208,14 +192,19 @@ class SearchBox(ListView):
 
 
 def category_filter(request, slug):
+    article = ArticleClass.objects.filter(category__slug=slug, status='Activate')
+    # pagination or صفحه بندی
+    paginator = Paginator(article, 6)
+    page_number = request.GET.get('page')
+    articles = paginator.get_page(page_number)
+    # دسته بندی
+    category_d = CategoryClass.objects.filter(slug=slug)
+
+    context = {
+        'category': category_d,
+        'pagination_article': articles,
+    }
     if request.user.is_authenticated:
-        article = ArticleClass.objects.filter(category__slug=slug, status='Activate')
-        # pagination or صفحه بندی
-        paginator = Paginator(article, 6)
-        page_number = request.GET.get('page')
-        articles = paginator.get_page(page_number)
-        # دسته بندی
-        category_d = CategoryClass.objects.filter(slug=slug)
         # سیستم لایک
         liked_posts = []
         for liked_post in request.user.likes.all():
@@ -226,22 +215,7 @@ def category_filter(request, slug):
             'liked_posts': liked_posts,
         }
         return render(request, 'articles/article-category.html', context)
-
-    else:
-        article = ArticleClass.objects.filter(category__slug=slug, status='Activate')
-        # pagination or صفحه بندی
-        paginator = Paginator(article, 6)
-        page_number = request.GET.get('page')
-        articles = paginator.get_page(page_number)
-        # دسته بندی
-        category_d = CategoryClass.objects.filter(slug=slug)
-
-        context = {
-            'category': category_d,
-            'pagination_article': articles,
-        }
-
-        return render(request, 'articles/article.html', context)
+    return render(request, 'articles/article.html', context)
 
 
 def about_me(request):
@@ -275,13 +249,3 @@ def trick_page(request):
 
 def error_404(request, exception):
     return render(request, '404.html')
-
-
-
-
-
-
-
-
-
-
